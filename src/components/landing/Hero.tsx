@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 export function Hero({ onFilterChange }: HeroProps) {
-  const [transaction, setTransaction] = useState<"Sale" | "Rent">("Sale");
+  const [transaction, setTransaction] = useState<"For Sale" | "For Rent">("For Sale");
   const [neighborhood, setNeighborhood] = useState("Todos");
   const [propertyType, setPropertyType] = useState("Todos");
 
@@ -134,9 +134,9 @@ export function Hero({ onFilterChange }: HeroProps) {
               <div className="grid grid-cols-2 rounded-xl bg-slate-100 p-1 min-h-[44px]">
                 <button
                   type="button"
-                  onClick={() => setTransaction("Sale")}
+                  onClick={() => setTransaction("For Sale")}
                   className={`flex items-center justify-center rounded-lg text-xs font-bold transition-all duration-150 ${
-                    transaction === "Sale"
+                    transaction === "For Sale"
                       ? "bg-white text-[#0B131F] shadow-xs"
                       : "text-slate-500 hover:text-slate-900"
                   }`}
@@ -145,9 +145,9 @@ export function Hero({ onFilterChange }: HeroProps) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setTransaction("Rent")}
+                  onClick={() => setTransaction("For Rent")}
                   className={`flex items-center justify-center rounded-lg text-xs font-bold transition-all duration-150 ${
-                    transaction === "Rent"
+                    transaction === "For Rent"
                       ? "bg-white text-[#0B131F] shadow-xs"
                       : "text-slate-500 hover:text-slate-900"
                   }`}

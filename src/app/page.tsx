@@ -78,7 +78,7 @@ export default function Home() {
               {secondaryProperties.length > 0 && (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                   {secondaryProperties.map((property) => (
-                    <PropertyCard key={property.listingId} property={property} />
+                    <PropertyCard key={property.id} property={property} />
                   ))}
                 </div>
               )}

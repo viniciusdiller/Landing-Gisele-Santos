@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { VivaRealMedia } from "@/types/viva-real";
+import { Foto } from "@/types/viva-real";
 
 interface PropertyGalleryProps {
-  media: VivaRealMedia[];
+  media: Foto[];
   title: string;
 }
 

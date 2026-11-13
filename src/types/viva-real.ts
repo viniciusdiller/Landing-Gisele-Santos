@@ -1,58 +1,65 @@
-export interface VivaRealMedia {
+export interface Foto {
   url: string;
+  isPrimary: boolean;
   caption?: string;
-  primary?: boolean;
 }
 
-export interface VivaRealAddress {
-  city: string;
-  state: string;
-  neighborhood: string;
-  street?: string;
-  streetNumber?: string;
-  postalCode?: string;
-  zone?: string;
-  nearby?: string[]; // Pontos de referência (ex: Lagoa, Praia de Itaúna, Shopping)
+export interface ValoresImovel {
+  venda?: number;
+  aluguel?: number;
+  condominio?: number;
+  iptu?: number;
 }
 
-export interface VivaRealFinancial {
-  transactionType: "Sale" | "Rent";
-  currency: "BRL";
-  amount: number;
-  condoFee?: number;
-  propertyTax?: number;   // IPTU
-  acceptsFinancing: boolean;
-  acceptsTrade?: boolean; // Aceita permuta
-  useFGTS?: boolean;      // Aceita uso de FGTS
-  banksAvailable?: string[]; // Bancos conveniados para simulação: Caixa, Itaú, Santander, Bradesco
-}
-
-export interface VivaRealDetails {
-  livingArea: number;     // m² de área útil
-  totalArea?: number;     // m² totais de terreno
-  builtArea?: number;     // m² de área construída
-  bedrooms: number;
-  bathrooms: number;
+export interface EstruturalImovel {
+  areaUtil: number;
+  areaTotal?: number;
+  anoConstrucao?: number;
+  quartos: number;
+  banheiros: number;
   suites: number;
-  garageSpaces: number;
-  sunOrientation?: "Manhã" | "Tarde" | "Nascente";
-  floors?: number;
-  features: string[];     // Características do imóvel (Piscina, Churrasqueira, etc.)
-  condoFeatures?: string[]; // Características do condomínio (Portaria 24h, Campo de futebol, etc.)
-  legalStatus: "Escritura e RGI" | "Em fase de averbação" | "Posse regularizada com histórico";
+  vagas: number;
+  posicaoSolar?: "Manhã" | "Tarde" | "Nascente";
 }
 
-export interface VivaRealProperty {
-  listingId: string;
-  title: string;
+export interface LocalizacaoImovel {
+  cep: string;
+  pais?: string;
+  estado: string;
+  cidade: string;
+  bairro: string;
+  rua: string;
+  numero: string;
+  complemento?: string;
+  lat?: number;
+  lng?: number;
+  pontosProximos?: string[];
+}
+
+export interface Imovel {
+  id: string;
   slug: string;
-  description: string;
-  propertyType: "Casa" | "Casa em Condomínio" | "Apartamento" | "Terreno" | "Comercial";
-  publicationType: "STANDARD" | "PREMIUM" | "HIGHLIGHT";
-  price: VivaRealFinancial;
-  address: VivaRealAddress;
-  details: VivaRealDetails;
-  media: VivaRealMedia[];
-  tag?: "Exclusividade" | "Frente Mar" | "Oportunidade" | "Lançamento" | "Vista Lagoa";
-  curatorNote?: string;   // Parecer técnico pessoal da Gisele
+  titulo: string;
+  descricao: string; // Já decodificada de entidades HTML (&lt;br&gt;)
+  finalidade: "For Sale" | "For Rent";
+  tipo: string;
+  tipoPublicacao?: "STANDARD" | "PREMIUM" | "HIGHLIGHT";
+  status?: string;
+  urlOriginal?: string;
+  
+  valores: ValoresImovel;
+  estrutural: EstruturalImovel;
+  localizacao: LocalizacaoImovel;
+  
+  comodidades: string[]; // Ex: ["Piscina", "Churrasqueira", "Elevador"]
+  fotos: Foto[];         // Array já ordenado, com a foto primary na posição 0
+  
+  // Metadados de conversão e curadoria da Gisele
+  seloDestaque?: "Exclusividade" | "Frente Mar" | "Oportunidade" | "Lançamento" | "Vista Lagoa";
+  notaCuradoria?: string;
+  aceitaFinanciamento: boolean;
+  aceitaPermuta?: boolean;
+  utilizaFGTS?: boolean;
+  bancosDisponiveis?: string[];
+  situacaoJuridica?: "Escritura e RGI" | "Em fase de averbação" | "Posse regularizada com histórico";
 }

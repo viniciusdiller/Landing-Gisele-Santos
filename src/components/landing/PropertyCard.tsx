@@ -17,14 +17,14 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
     property.media.find((m) => m.primary)?.url || property.media[0]?.url;
 
   if (featured) {
-    // 16:9 Widescreen Asymmetrical Editorial Hero Property
+    // 16:9 Editorial Hero Property
     return (
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-        className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-slate-900/5 transition-all duration-300 hover:border-slate-300"
+        className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-slate-900/5 transition-colors duration-200 hover:border-slate-300"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* Media Container (7 cols) */}
@@ -48,7 +48,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               <Badge variant="dark">Ref: {property.listingId}</Badge>
             </div>
             {property.price.acceptsFinancing && (
-              <div className="absolute bottom-3 left-3 rounded-md bg-[#0B131F]/90 px-2.5 py-1 text-[10px] font-semibold text-emerald-300 backdrop-blur-sm sm:text-[11px]">
+              <div className="absolute bottom-3 left-3 rounded-md bg-[#0B131F]/90 px-2.5 py-1 text-[10px] font-semibold text-emerald-300 backdrop-blur-xs sm:text-[11px]">
                 Aceita Financiamento Bancário
               </div>
             )}
@@ -64,7 +64,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               </div>
 
               <Link href={`/imoveis/${property.slug}`}>
-                <h3 className="mt-2 font-display text-xl font-bold leading-tight text-[#0B131F] transition-colors hover:text-[#0E7058] sm:text-2xl lg:text-3xl">
+                <h3 className="mt-2 font-display text-xl font-bold leading-tight text-[#0B131F] transition-colors duration-150 hover:text-[#0E7058] sm:text-2xl lg:text-3xl">
                   {property.title}
                 </h3>
               </Link>
@@ -87,16 +87,16 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
 
               {/* Metric Badges */}
               <div className="mt-4 flex flex-wrap gap-1.5 text-xs font-medium text-slate-700 sm:mt-5 sm:gap-2">
-                <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 tabular-nums sm:px-3 sm:py-1.5">
+                <span className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 tabular-nums sm:px-3">
                   <strong>{property.details.livingArea}</strong> m² privativos
                 </span>
                 {property.details.bedrooms > 0 && (
-                  <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 tabular-nums sm:px-3 sm:py-1.5">
+                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 tabular-nums sm:px-3">
                     <strong>{property.details.bedrooms}</strong> qts ({property.details.suites} suítes)
                   </span>
                 )}
                 {property.details.garageSpaces > 0 && (
-                  <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 tabular-nums sm:px-3 sm:py-1.5">
+                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 tabular-nums sm:px-3">
                     <strong>{property.details.garageSpaces}</strong> vagas
                   </span>
                 )}
@@ -117,7 +117,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               <div className="grid grid-cols-2 gap-2 sm:flex">
                 <Link
                   href={`/imoveis/${property.slug}`}
-                  className="inline-flex h-10 items-center justify-center rounded-lg border border-slate-300 px-3 text-center text-xs font-semibold text-slate-800 transition-colors hover:bg-slate-50 sm:px-4"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-slate-300 px-4 text-center text-xs font-semibold text-slate-800 transition-colors duration-150 hover:bg-slate-50 active:scale-[0.98]"
                 >
                   Ver Imóvel
                 </Link>
@@ -127,7 +127,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
                   href={buildWhatsAppLink(property)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-10 items-center justify-center rounded-lg bg-[#0E7058] px-3 text-center text-xs font-semibold tracking-wide text-white transition-colors hover:bg-[#09503E] sm:px-4"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#0E7058] px-4 text-center text-xs font-semibold tracking-wide text-white shadow-xs transition-colors duration-150 hover:bg-[#09503E]"
                 >
                   WhatsApp
                 </motion.a>
@@ -139,15 +139,14 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
     );
   }
 
-  // Vertical Architectural Card com Microinterações de Hover
+  // Vertical Architectural Card
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-      whileHover={{ y: -4 }}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-shadow duration-300 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5"
     >
       {/* Media with Badges */}
       <Link
@@ -170,7 +169,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           <Badge variant="dark">Ref: {property.listingId}</Badge>
         </div>
         {property.price.acceptsFinancing && (
-          <div className="absolute bottom-3 left-3 rounded bg-[#0B131F]/90 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 backdrop-blur-sm">
+          <div className="absolute bottom-3 left-3 rounded bg-[#0B131F]/90 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 backdrop-blur-xs">
             Financiável
           </div>
         )}
@@ -184,7 +183,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           </div>
 
           <Link href={`/imoveis/${property.slug}`}>
-            <h4 className="mt-1.5 font-display text-base font-bold leading-snug text-[#0B131F] transition-colors hover:text-[#0E7058] sm:text-lg line-clamp-2">
+            <h4 className="mt-1.5 font-display text-base font-bold leading-snug text-[#0B131F] transition-colors duration-150 hover:text-[#0E7058] sm:text-lg line-clamp-2">
               {property.title}
             </h4>
           </Link>
@@ -217,7 +216,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           </div>
         </div>
 
-        {/* Card Footer */}
+        {/* Card Footer com Hitbox de 44px */}
         <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5 sm:mt-6 sm:pt-4">
           <div>
             <span className="block text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
@@ -231,17 +230,17 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           <div className="flex gap-1.5 sm:gap-2">
             <Link
               href={`/imoveis/${property.slug}`}
-              className="rounded-md border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50 sm:px-3"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-slate-200 px-3 text-xs font-semibold text-slate-700 transition-colors duration-150 hover:bg-slate-50 active:scale-95"
             >
               Ficha
             </Link>
             <motion.a
-              whileHover={{ scale: 1.04 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
               href={buildWhatsAppLink(property)}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-[#0B131F] px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#0E7058] sm:px-3"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#0B131F] px-3 text-xs font-semibold text-white transition-colors duration-150 hover:bg-[#0E7058]"
             >
               WhatsApp
             </motion.a>

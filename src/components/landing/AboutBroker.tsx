@@ -3,10 +3,10 @@ import { buildWhatsAppLink } from "@/services/property-service";
 
 export function AboutBroker() {
   return (
-    <section id="sobre-mim" className="border-t border-slate-200/80 bg-[#FAFAF8] py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Portrait Container com enquadramento autêntico (5 cols) */}
+    <section id="sobre-mim" className="border-t border-slate-200/80 bg-[#FAFAF8] py-16 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* Portrait Container (5 cols) */}
           <div className="relative mx-auto w-full max-w-md lg:col-span-5">
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-200 shadow-xl shadow-slate-900/10">
               <Image
@@ -20,12 +20,12 @@ export function AboutBroker() {
             </div>
 
             {/* Cartão de Identificação Profissional */}
-            <div className="absolute -bottom-5 -right-3 rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:right-4">
+            <div className="absolute -bottom-5 -right-2 rounded-xl border border-slate-200 bg-white p-3.5 shadow-lg sm:right-4 sm:p-4">
               <div className="flex items-center gap-3">
                 <div className="relative h-9 w-20 overflow-hidden">
                   <Image
                     src="/images/gisele-logo.png"
-                    alt="Logo"
+                    alt="Logo Gisele Andrade"
                     fill
                     className="object-contain"
                   />
@@ -42,13 +42,13 @@ export function AboutBroker() {
             </div>
           </div>
 
-          {/* Texto em Primeira Pessoa: Humano, Pragmático, Sem Fórmulas de IA (7 cols) */}
-          <div className="lg:col-span-7">
+          {/* Texto em Primeira Pessoa: Humano, Pragmático (7 cols) */}
+          <div className="mt-4 lg:mt-0 lg:col-span-7">
             <span className="text-xs font-semibold tracking-wider text-[#0E7058] uppercase">
               Sobre mim
             </span>
 
-            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-[#0B131F] sm:text-4xl">
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0B131F] sm:text-3xl lg:text-4xl">
               Eu não vendo promessas. Vendo imóveis com endereço certo, chave na mão e documento na mesa.
             </h2>
 
@@ -71,9 +71,9 @@ export function AboutBroker() {
               </p>
             </div>
 
-            {/* Três pontos práticos da atuação */}
+            {/* Três pilares práticos */}
             <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+              <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
                 <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
                   Endereço Físico
                 </span>
@@ -82,7 +82,7 @@ export function AboutBroker() {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+              <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
                 <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
                   Auditoria de RGI
                 </span>
@@ -91,7 +91,7 @@ export function AboutBroker() {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+              <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
                 <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
                   Correspondente
                 </span>
@@ -106,7 +106,7 @@ export function AboutBroker() {
                 href={buildWhatsAppLink(undefined, "Gostaria de agendar um café no Lake's Shopping para conversar sobre imóveis.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-11 items-center justify-center rounded-lg bg-[#0B131F] px-6 text-xs font-semibold tracking-wider text-white uppercase transition-colors hover:bg-[#162438]"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#0B131F] px-6 text-xs font-semibold tracking-wider text-white uppercase shadow-xs transition-colors duration-150 hover:bg-[#162438] active:scale-[0.98]"
               >
                 Falar Diretamente Comigo
               </a>

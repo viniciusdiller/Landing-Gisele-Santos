@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { SellersCTA } from "@/components/landing/SellersCTA";
+import { PropertyGallery } from "@/components/property/PropertyGallery";
 import {
   getAllProperties,
   getPropertyBySlug,
@@ -38,20 +39,44 @@ export default async function PropertyDetailPage({ params }: PageProps) {
     <div className="min-h-screen bg-[#FAFAF8]">
       <Header />
 
-      {/* Breadcrumb de navegação */}
-      <div className="border-b border-slate-200/80 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center gap-1.5 px-4 py-3 text-xs text-slate-500 sm:px-6 lg:px-10">
-          <Link href="/" className="hover:text-[#0B131F]">
-            Início
+      {/* Barra de Navegação Contextual e Botão Voltar */}
+      <div className="border-b border-slate-200/80 bg-white sticky top-20 z-30 shadow-xs">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:px-6 lg:px-10">
+          <Link
+            href="/#imoveis"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg px-2.5 py-2 text-xs sm:text-sm font-semibold text-slate-700 transition-colors duration-150 hover:bg-slate-100 hover:text-[#0B131F] active:scale-95"
+          >
+            <svg
+              className="h-4 w-4 text-[#0E7058]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <span>Voltar para todos os imóveis</span>
           </Link>
-          <span>/</span>
-          <Link href="/#imoveis" className="hover:text-[#0B131F]">
-            Imóveis
-          </Link>
-          <span>/</span>
-          <span className="truncate text-slate-800">{property.address.neighborhood}</span>
-          <span>/</span>
-          <span className="font-semibold text-[#0E7058]">Ref: {property.listingId}</span>
+
+          <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-500">
+            <Link href="/" className="hover:text-[#0B131F]">
+              Início
+            </Link>
+            <span>/</span>
+            <Link href="/#imoveis" className="hover:text-[#0B131F]">
+              Imóveis
+            </Link>
+            <span>/</span>
+            <span className="truncate max-w-[120px] text-slate-800">
+              {property.address.neighborhood}
+            </span>
+            <span>/</span>
+            <span className="font-semibold text-[#0E7058]">Ref: {property.listingId}</span>
+          </div>
         </div>
       </div>
 
@@ -101,59 +126,33 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Galeria de Fotos */}
-          <div className="mt-6 space-y-3 sm:mt-8">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-lg sm:aspect-[16/9] lg:aspect-[21/9]">
-              <Image
-                src={property.media[0]?.url}
-                alt={property.title}
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-              />
-              {property.media[0]?.caption && (
-                <div className="absolute right-3 bottom-3 left-3 rounded-lg bg-black/70 px-3 py-2 text-xs text-white backdrop-blur-md sm:right-4 sm:bottom-4 sm:left-4 sm:px-4 sm:py-2.5">
-                  {property.media[0].caption}
-                </div>
-              )}
-            </div>
-
-            {/* Thumbnails grid */}
-            {property.media.length > 1 && (
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-                {property.media.slice(1).map((img, i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100"
-                  >
-                    <Image src={img.url} alt="" fill sizes="50vw" className="object-cover" />
-                    {img.caption && (
-                      <span className="absolute bottom-1.5 left-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[9px] text-white sm:text-[10px]">
-                        {img.caption}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+          {/* Galeria de Fotos Interativa com Setas, Contador e Thumbnails */}
+          <div className="mt-6 sm:mt-8">
+            <PropertyGallery media={property.media} title={property.title} />
           </div>
 
-          {/* Grid com Especificações do XML e Sidebar de Contato */}
+          {/* Grid com Especificações e Sidebar de Contato */}
           <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-12 lg:grid-cols-12 lg:gap-16">
-            {/* Coluna Principal: Informações Técnicas do XML (8 cols) */}
+            {/* Coluna Principal: Informações Técnicas (8 cols) */}
             <div className="space-y-8 sm:space-y-12 lg:col-span-8">
-              {/* Barra de Especificações Numéricas Tabulares com SVGs dedicados */}
+              {/* Barra de Especificações Numéricas Tabulares */}
               <div className="grid grid-cols-2 gap-3 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm sm:grid-cols-4 sm:gap-4 sm:p-6">
                 {/* Área Útil */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058] sm:h-10 sm:w-10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058]">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.8}
+                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">Área Útil</span>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">
+                      Área Útil
+                    </span>
                     <strong className="font-display text-sm font-bold tabular-nums text-[#0B131F] sm:text-base">
                       {property.details.livingArea > 0 ? `${property.details.livingArea} m²` : "—"}
                     </strong>
@@ -162,13 +161,20 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
                 {/* Quartos e Suítes */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058] sm:h-10 sm:w-10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058]">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.8}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">Quartos</span>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">
+                      Quartos
+                    </span>
                     <strong className="font-display text-sm font-bold tabular-nums text-[#0B131F] sm:text-base">
                       {property.details.bedrooms} ({property.details.suites} suítes)
                     </strong>
@@ -177,13 +183,20 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
                 {/* Banheiros */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058] sm:h-10 sm:w-10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058]">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.8}
+                        d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">Banheiros</span>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">
+                      Banheiros
+                    </span>
                     <strong className="font-display text-sm font-bold tabular-nums text-[#0B131F] sm:text-base">
                       {property.details.bathrooms}
                     </strong>
@@ -192,13 +205,20 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
                 {/* Vagas */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058] sm:h-10 sm:w-10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-[#0E7058]">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 16l-1-7m-11 7l1-7m0 0l2-2h8l2 2m-12 0h12M5 19a2 2 0 100-4 2 2 0 000 4zm14 0a2 2 0 100-4 2 2 0 000 4z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.8}
+                        d="M19 16l-1-7m-11 7l1-7m0 0l2-2h8l2 2m-12 0h12M5 19a2 2 0 100-4 2 2 0 000 4zm14 0a2 2 0 100-4 2 2 0 000 4z"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">Vagas</span>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase">
+                      Vagas
+                    </span>
                     <strong className="font-display text-sm font-bold tabular-nums text-[#0B131F] sm:text-base">
                       {property.details.garageSpaces}
                     </strong>
@@ -231,7 +251,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </p>
               </div>
 
-              {/* Características e Comodidades (Features do XML) */}
+              {/* Características e Comodidades */}
               {property.details.features.length > 0 && (
                 <div>
                   <h3 className="font-display text-lg font-bold text-[#0B131F] sm:text-xl">
@@ -241,7 +261,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     {property.details.features.map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white px-3.5 py-2.5 text-xs font-medium text-slate-700 shadow-sm sm:text-sm"
+                        className="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white px-3.5 py-2.5 text-xs font-medium text-slate-700 shadow-xs sm:text-sm"
                       >
                         <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#0E7058] text-[10px] font-bold text-white">
                           ✓
@@ -273,28 +293,42 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Posição Solar:</span>
-                    <strong className="text-slate-800">{property.details.sunOrientation || "Sol da manhã"}</strong>
+                    <strong className="text-slate-800">
+                      {property.details.sunOrientation || "Sol da manhã"}
+                    </strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Área Construída:</span>
-                    <strong className="tabular-nums text-slate-800">{property.details.builtArea || property.details.livingArea} m²</strong>
+                    <strong className="tabular-nums text-slate-800">
+                      {property.details.builtArea || property.details.livingArea} m²
+                    </strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Área Total do Lote:</span>
-                    <strong className="tabular-nums text-slate-800">{property.details.totalArea || "—"} m²</strong>
+                    <strong className="tabular-nums text-slate-800">
+                      {property.details.totalArea || "—"} m²
+                    </strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">IPTU Anual:</span>
-                    <strong className="tabular-nums text-slate-800">{property.price.propertyTax ? formatBRL(property.price.propertyTax) : "Sob consulta"}</strong>
+                    <strong className="tabular-nums text-slate-800">
+                      {property.price.propertyTax
+                        ? formatBRL(property.price.propertyTax)
+                        : "Sob consulta"}
+                    </strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Condomínio Mensal:</span>
-                    <strong className="tabular-nums text-slate-800">{property.price.condoFee ? formatBRL(property.price.condoFee) : "Não possui"}</strong>
+                    <strong className="tabular-nums text-slate-800">
+                      {property.price.condoFee
+                        ? formatBRL(property.price.condoFee)
+                        : "Não possui"}
+                    </strong>
                   </div>
                 </div>
               </div>
 
-              {/* Seção de Financiamento Dedicada ao Imóvel */}
+              {/* Seção de Financiamento Bancário */}
               {property.price.acceptsFinancing && (
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                   <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
@@ -312,8 +346,10 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   </div>
 
                   <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    Avaliamos sua documentação e cuidamos de todo o processo junto à Caixa, Itaú, Santander ou Bradesco.
-                    {property.price.useFGTS && " Você pode utilizar o saldo do seu FGTS como parte do pagamento da entrada."}
+                    Avaliamos sua documentação e cuidamos de todo o processo junto à Caixa,
+                    Itaú, Santander ou Bradesco.
+                    {property.price.useFGTS &&
+                      " Você pode utilizar o saldo do seu FGTS como parte do pagamento da entrada."}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -332,7 +368,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                       href={buildFinancingSimulatorLink(property)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0E7058] hover:underline sm:text-sm"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-[#0E7058] hover:underline sm:text-sm"
                     >
                       Solicitar simulação exata das parcelas para este imóvel →
                     </a>
@@ -341,9 +377,9 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* Sidebar Fixa de Conversão e Agendamento Direto (4 cols) */}
+            {/* Sidebar Fixa de Conversão */}
             <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 sm:p-6 lg:sticky lg:top-28">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 sm:p-6 lg:sticky lg:top-36">
                 <div className="flex items-center gap-3 border-b border-slate-100 pb-5">
                   <div className="relative h-12 w-28 overflow-hidden">
                     <Image
@@ -372,12 +408,12 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   </span>
                 </div>
 
-                <div className="mt-6 space-y-2.5 sm:space-y-3">
+                <div className="mt-6 space-y-3">
                   <a
                     href={buildWhatsAppLink(property)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-12 w-full items-center justify-center rounded-xl bg-[#0E7058] text-center text-xs font-semibold tracking-wider text-white uppercase transition-colors hover:bg-[#09503E]"
+                    className="flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#0E7058] px-4 text-center text-xs font-semibold tracking-wider text-white uppercase shadow-sm transition-transform duration-150 hover:bg-[#09503E] active:scale-[0.98]"
                   >
                     Agendar Visita no WhatsApp
                   </a>
@@ -387,7 +423,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                       href={buildFinancingSimulatorLink(property)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-11 w-full items-center justify-center rounded-xl border border-slate-300 text-center text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                      className="flex min-h-[44px] w-full items-center justify-center rounded-xl border border-slate-300 px-4 text-center text-xs font-semibold text-slate-700 transition-colors duration-150 hover:bg-slate-50 active:scale-[0.98]"
                     >
                       Simular Financiamento
                     </a>

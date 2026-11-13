@@ -20,10 +20,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-[#FAFAF8]/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
-        {/* Brand identity com a Logo Real sem box branca */}
-        <Link href="/" className="group flex items-center gap-3">
+        {/* Brand identity com a Logo Real */}
+        <Link href="/" className="group flex items-center gap-3 min-h-[44px] py-1">
           <motion.div
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             className="relative h-12 w-32 sm:h-14 sm:w-40"
@@ -47,15 +47,15 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation com Hover Indicators táteis */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 lg:gap-8 md:flex">
           {menuItems.map((item, idx) => (
             <Link
               key={idx}
               href={item.href}
-              className="group relative text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
+              className="group relative inline-flex min-h-[44px] items-center text-sm font-medium text-slate-600 transition-colors duration-150 hover:text-[#0B131F]"
             >
               {item.label}
-              <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#0E7058] transition-all duration-200 group-hover:w-full" />
+              <span className="absolute bottom-2 left-0 h-[2px] w-0 bg-[#0E7058] transition-all duration-200 group-hover:w-full" />
             </Link>
           ))}
         </nav>
@@ -63,24 +63,24 @@ export function Header() {
         {/* Right CTA Desktop & Mobile Hamburger Toggle */}
         <div className="flex items-center gap-2.5">
           <motion.a
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
             href={buildWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center justify-center rounded-lg bg-[#0E7058] px-3.5 text-xs font-semibold tracking-wide text-white shadow-sm transition-colors hover:bg-[#09503E] sm:px-4"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#0E7058] px-4 text-xs font-semibold tracking-wide text-white shadow-xs transition-colors duration-150 hover:bg-[#09503E]"
           >
             WhatsApp
           </motion.a>
 
-          {/* Hamburger Button com Animação Física */}
+          {/* Hamburger Button com Hitbox 44x44px mínima */}
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.92 }}
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Menu principal"
-            className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-800 shadow-sm md:hidden"
+            className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs md:hidden"
           >
             <div className="flex h-4 w-4 flex-col justify-between">
               <motion.span
@@ -103,21 +103,19 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Drawer com Física Real (Emil Kowalski curve) */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Backdrop com fade suave */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 top-20 z-40 bg-[#0B131F]/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 top-20 z-40 bg-[#0B131F]/40 backdrop-blur-xs md:hidden"
             />
 
-            {/* Menu Drawer deslizante com staggered items */}
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
@@ -128,23 +126,23 @@ export function Header() {
               }}
               className="relative z-50 overflow-hidden border-b border-slate-200 bg-[#FAFAF8] shadow-2xl md:hidden"
             >
-              <div className="px-6 py-6">
+              <div className="px-5 py-6">
                 <nav className="flex flex-col divide-y divide-slate-100">
                   {menuItems.map((item, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: -16 }}
+                      initial={{ opacity: 0, x: -14 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{
-                        delay: 0.04 * idx,
-                        duration: 0.2,
+                        delay: 0.03 * idx,
+                        duration: 0.18,
                         ease: "easeOut",
                       }}
                     >
                       <Link
                         href={item.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center justify-between py-3.5 text-base font-semibold text-slate-800 transition-colors active:text-[#0E7058]"
+                        className="flex min-h-[48px] items-center justify-between py-3 text-sm font-semibold text-slate-800 transition-colors duration-150 active:text-[#0E7058]"
                       >
                         <span>{item.label}</span>
                         <span className="rounded bg-slate-100 px-2 py-0.5 font-display text-[11px] font-bold text-slate-500">
@@ -157,10 +155,10 @@ export function Header() {
 
                 {/* Card de Atendimento Lake's Shopping */}
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.22, duration: 0.2 }}
-                  className="mt-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+                  transition={{ delay: 0.2, duration: 0.2 }}
+                  className="mt-6 rounded-xl border border-slate-200 bg-white p-4 shadow-xs"
                 >
                   <div className="flex items-center justify-between">
                     <div>

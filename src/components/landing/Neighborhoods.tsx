@@ -32,8 +32,7 @@ export function Neighborhoods() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: index * 0.08, duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -3 }}
-              className={`group relative overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition-shadow duration-300 hover:shadow-xl ${
+              className={`group relative overflow-hidden rounded-2xl bg-slate-900 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl ${
                 index === 0 ? "sm:col-span-2 lg:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
               }`}
             >
@@ -47,7 +46,7 @@ export function Neighborhoods() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/90 via-[#0B131F]/30 to-transparent" />
 
               <div className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6">
-                <span className="inline-block rounded bg-white/20 px-2 py-0.5 text-[10px] font-semibold tracking-wider text-emerald-200 backdrop-blur-md uppercase sm:text-[11px]">
+                <span className="inline-block rounded-md bg-white/20 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-emerald-200 backdrop-blur-xs uppercase sm:text-[11px]">
                   {item.badge}
                 </span>
                 <h3 className="mt-1.5 font-display text-xl font-bold text-white sm:text-2xl">

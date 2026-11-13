@@ -30,7 +30,7 @@ export function Hero({ onFilterChange }: HeroProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Asymmetrical Hero Layout */}
         <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12 lg:gap-8">
-          {/* Left Column: Bold Headline com Stagger Motion */}
+          {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export function Hero({ onFilterChange }: HeroProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1, duration: 0.3 }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold tracking-wider text-slate-700 uppercase"
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold tracking-wider text-slate-700 uppercase shadow-xs"
             >
               Curadoria Imobiliária em Saquarema • RJ
             </motion.div>
@@ -58,43 +58,34 @@ export function Hero({ onFilterChange }: HeroProps) {
 
             {/* Quick Stat Anchors */}
             <div className="mt-6 grid grid-cols-3 gap-3 border-t border-slate-200/90 pt-5 sm:gap-6 sm:pt-6">
-              <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.15 }}
-              >
+              <div className="transition-transform duration-150 hover:-translate-y-0.5">
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   R$ 85M+
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Em patrimônio avaliado
                 </span>
-              </motion.div>
-              <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.15 }}
-              >
+              </div>
+              <div className="transition-transform duration-150 hover:-translate-y-0.5">
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   100%
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Imóveis com RGI
                 </span>
-              </motion.div>
-              <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.15 }}
-              >
+              </div>
+              <div className="transition-transform duration-150 hover:-translate-y-0.5">
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   Lake&apos;s
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Shopping • Loja 23
                 </span>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Photography com Motion suave */}
+          {/* Right Column: Photography */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -112,12 +103,7 @@ export function Hero({ onFilterChange }: HeroProps) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/80 via-transparent to-transparent" />
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6"
-              >
+              <div className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6">
                 <span className="text-[10px] font-semibold tracking-wider text-emerald-300 uppercase sm:text-xs">
                   Destaque Beira-Lagoa
                 </span>
@@ -127,31 +113,31 @@ export function Hero({ onFilterChange }: HeroProps) {
                 <span className="mt-1 block font-display text-base font-semibold tabular-nums text-white sm:mt-2 sm:text-lg">
                   R$ 1.450.000
                 </span>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Tactile Search Bar com Motion */}
+        {/* Tactile Search Bar com Hitbox 44px+ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, delay: 0.25, ease: [0.23, 1, 0.32, 1] }}
           className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/5 sm:mt-12 lg:p-6"
         >
-          <form onSubmit={handleSearch} className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-12 md:items-end md:gap-4">
+          <form onSubmit={handleSearch} className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-12 md:items-end md:gap-4">
             {/* Transaction Segmented Control */}
             <div className="sm:col-span-2 md:col-span-3">
               <label className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 Finalidade
               </label>
-              <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
+              <div className="grid grid-cols-2 rounded-xl bg-slate-100 p-1 min-h-[44px]">
                 <button
                   type="button"
                   onClick={() => setTransaction("Sale")}
-                  className={`rounded-md py-2 text-xs font-bold transition-all ${
+                  className={`flex items-center justify-center rounded-lg text-xs font-bold transition-all duration-150 ${
                     transaction === "Sale"
-                      ? "bg-white text-[#0B131F] shadow-sm"
+                      ? "bg-white text-[#0B131F] shadow-xs"
                       : "text-slate-500 hover:text-slate-900"
                   }`}
                 >
@@ -160,9 +146,9 @@ export function Hero({ onFilterChange }: HeroProps) {
                 <button
                   type="button"
                   onClick={() => setTransaction("Rent")}
-                  className={`rounded-md py-2 text-xs font-bold transition-all ${
+                  className={`flex items-center justify-center rounded-lg text-xs font-bold transition-all duration-150 ${
                     transaction === "Rent"
-                      ? "bg-white text-[#0B131F] shadow-sm"
+                      ? "bg-white text-[#0B131F] shadow-xs"
                       : "text-slate-500 hover:text-slate-900"
                   }`}
                 >
@@ -179,7 +165,7 @@ export function Hero({ onFilterChange }: HeroProps) {
               <select
                 value={neighborhood}
                 onChange={(e) => setNeighborhood(e.target.value)}
-                className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-800 transition-colors focus:border-[#0E7058] focus:outline-none"
+                className="h-11 min-h-[44px] w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-800 transition-colors focus:border-[#0E7058] focus:outline-none"
               >
                 <option value="Todos">Todos os bairros</option>
                 <option value="Itaúna">Itaúna</option>
@@ -199,7 +185,7 @@ export function Hero({ onFilterChange }: HeroProps) {
               <select
                 value={propertyType}
                 onChange={(e) => setPropertyType(e.target.value)}
-                className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-800 transition-colors focus:border-[#0E7058] focus:outline-none"
+                className="h-11 min-h-[44px] w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-800 transition-colors focus:border-[#0E7058] focus:outline-none"
               >
                 <option value="Todos">Todos os tipos</option>
                 <option value="Casa">Casa Linear / Duplex</option>
@@ -209,14 +195,14 @@ export function Hero({ onFilterChange }: HeroProps) {
               </select>
             </div>
 
-            {/* Action Submit */}
+            {/* Action Submit com Hitbox de 44px e efeito tátil */}
             <div className="sm:col-span-2 md:col-span-3">
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 type="submit"
-                className="h-11 w-full rounded-lg bg-[#0B131F] text-sm font-semibold tracking-wide text-white shadow-sm transition-colors hover:bg-[#162438]"
+                className="flex h-11 min-h-[44px] w-full items-center justify-center rounded-xl bg-[#0B131F] text-sm font-semibold tracking-wide text-white shadow-xs transition-colors duration-150 hover:bg-[#162438]"
               >
                 Filtrar Oportunidades
               </motion.button>

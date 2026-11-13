@@ -5,9 +5,9 @@ import { buildWhatsAppLink } from "@/services/property-service";
 export function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-[#070C14] py-16 text-slate-400">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12">
-          {/* Identity column com a Logo Branca Oficial em Section Escura */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          {/* Identity column com a Logo Branca Oficial */}
           <div className="lg:col-span-5">
             <div className="relative h-16 w-44">
               <Image
@@ -37,13 +37,20 @@ export function Footer() {
             <span className="block text-xs font-semibold tracking-wider text-white uppercase">
               Endereço Físico & Contato
             </span>
-            <ul className="mt-4 space-y-2 text-xs leading-relaxed">
+            <ul className="mt-4 space-y-2.5 text-xs leading-relaxed">
               <li className="text-slate-300">
                 <strong>Lake&apos;s Shopping:</strong> Av. Saquarema, 567 — Loja 23
               </li>
               <li>Porto Novo / Centro — Saquarema / RJ — CEP 28991-311</li>
               <li className="pt-2">
-                <strong>WhatsApp / Telefone:</strong> (22) 99913-2185
+                <a
+                  href={buildWhatsAppLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center text-slate-300 hover:text-white transition-colors duration-150"
+                >
+                  <strong>WhatsApp / Telefone:</strong>&nbsp;(22) 99913-2185 ↗
+                </a>
               </li>
               <li>
                 <strong>E-mail:</strong> giselesandradeimoveis@gmail.com
@@ -56,13 +63,13 @@ export function Footer() {
             <span className="block text-xs font-semibold tracking-wider text-white uppercase">
               Canais Oficiais
             </span>
-            <ul className="mt-4 space-y-2 text-xs">
+            <ul className="mt-4 space-y-1 text-xs">
               <li>
                 <a
                   href="https://www.instagram.com/giselesandradeimoveis/?hl=en"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
                 >
                   Instagram Oficial ↗
                 </a>
@@ -72,23 +79,32 @@ export function Footer() {
                   href={buildWhatsAppLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
                 >
                   Canal Direto de WhatsApp ↗
                 </a>
               </li>
               <li>
-                <Link href="/#imoveis" className="transition-colors hover:text-white">
+                <Link
+                  href="/#imoveis"
+                  className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
+                >
                   Carteira de Imóveis
                 </Link>
               </li>
               <li>
-                <Link href="/#sobre-mim" className="transition-colors hover:text-white">
+                <Link
+                  href="/#sobre-mim"
+                  className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
+                >
                   Sobre mim
                 </Link>
               </li>
               <li>
-                <Link href="/#financiamento" className="transition-colors hover:text-white">
+                <Link
+                  href="/#financiamento"
+                  className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
+                >
                   Simular Financiamento
                 </Link>
               </li>

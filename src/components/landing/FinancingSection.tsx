@@ -1,5 +1,3 @@
-import { formatBRL } from "@/services/property-service";
-
 export function FinancingSection() {
   const financingWhatsApp =
     "https://wa.me/5522999132185?text=" +
@@ -31,15 +29,15 @@ export function FinancingSection() {
   ];
 
   return (
-    <section id="financiamento" className="border-t border-slate-200/80 bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+    <section id="financiamento" className="border-t border-slate-200/80 bg-white py-16 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           {/* Texto explicativo */}
           <div className="lg:col-span-6">
             <span className="text-xs font-semibold tracking-wider text-[#0E7058] uppercase">
               Correspondente e Assessoria Bancária
             </span>
-            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-[#0B131F] sm:text-4xl">
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#0B131F] sm:text-3xl lg:text-4xl">
               Simule e financie seu imóvel em Saquarema sem enfrentar fila de agência.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
@@ -50,8 +48,8 @@ export function FinancingSection() {
             </p>
 
             <div className="mt-8 space-y-3">
-              <div className="flex items-start gap-3 rounded-lg border border-slate-200/90 bg-slate-50 p-3.5">
-                <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
+              <div className="flex items-start gap-3 rounded-xl border border-slate-200/90 bg-slate-50 p-3.5 shadow-xs">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
                   ✓
                 </span>
                 <div>
@@ -64,8 +62,8 @@ export function FinancingSection() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 rounded-lg border border-slate-200/90 bg-slate-50 p-3.5">
-                <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
+              <div className="flex items-start gap-3 rounded-xl border border-slate-200/90 bg-slate-50 p-3.5 shadow-xs">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
                   ✓
                 </span>
                 <div>
@@ -78,8 +76,8 @@ export function FinancingSection() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 rounded-lg border border-slate-200/90 bg-slate-50 p-3.5">
-                <span className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
+              <div className="flex items-start gap-3 rounded-xl border border-slate-200/90 bg-slate-50 p-3.5 shadow-xs">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0E7058] text-xs font-bold text-white">
                   ✓
                 </span>
                 <div>
@@ -98,7 +96,7 @@ export function FinancingSection() {
                 href={financingWhatsApp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-[#0E7058] px-6 text-xs font-semibold tracking-wider text-white uppercase transition-colors hover:bg-[#09503E]"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-[#0E7058] px-6 text-xs font-semibold tracking-wider text-white uppercase shadow-xs transition-colors duration-150 hover:bg-[#09503E] active:scale-[0.98]"
               >
                 Solicitar Simulação de Financiamento
               </a>
@@ -110,14 +108,14 @@ export function FinancingSection() {
             {bankLinks.map((bank, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
+                className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-xs transition-all duration-200 hover:border-slate-300 hover:shadow-md"
               >
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="font-display text-sm font-bold text-[#0B131F]">
                       {bank.name}
                     </span>
-                    <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-[#0E7058]">
+                    <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-[#0E7058]">
                       {bank.badge}
                     </span>
                   </div>
@@ -131,7 +129,7 @@ export function FinancingSection() {
                     href={`https://wa.me/5522999132185?text=${encodeURIComponent(`Olá Gisele! Gostaria de simular meu financiamento imobiliário pelo ${bank.name}.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-bold text-[#0E7058] hover:underline"
+                    className="inline-flex min-h-[44px] items-center text-xs font-bold text-[#0E7058] hover:underline"
                   >
                     Simular com a Gisele →
                   </a>

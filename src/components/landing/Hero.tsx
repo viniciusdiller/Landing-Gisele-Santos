@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { PropertyFilterOptions } from "@/services/property-service";
 
 interface HeroProps {
@@ -29,11 +30,21 @@ export function Hero({ onFilterChange }: HeroProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Asymmetrical Hero Layout */}
         <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12 lg:gap-8">
-          {/* Left Column: Bold Typographic Headline (7 cols) */}
-          <div className="lg:col-span-7">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold tracking-wider text-slate-700 uppercase">
+          {/* Left Column: Bold Headline com Stagger Motion */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+            className="lg:col-span-7"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold tracking-wider text-slate-700 uppercase"
+            >
               Curadoria Imobiliária em Saquarema • RJ
-            </div>
+            </motion.div>
 
             <h1 className="font-display text-3xl leading-[1.1] font-bold tracking-tight text-[#0B131F] sm:text-5xl lg:text-6xl">
               Imóveis com alma entre o mar e a tranquilidade da lagoa.
@@ -45,49 +56,68 @@ export function Hero({ onFilterChange }: HeroProps) {
               verdade e localização privilegiada na Região dos Lagos.
             </p>
 
-            {/* Quick Stat Anchors - Responsivo com wrap limpo */}
+            {/* Quick Stat Anchors */}
             <div className="mt-6 grid grid-cols-3 gap-3 border-t border-slate-200/90 pt-5 sm:gap-6 sm:pt-6">
-              <div>
+              <motion.div
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
+              >
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   R$ 85M+
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Em patrimônio avaliado
                 </span>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
+              >
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   100%
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Imóveis com RGI
                 </span>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
+              >
                 <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   Lake&apos;s
                 </span>
                 <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Shopping • Loja 23
                 </span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: High-Res Editorial Photography */}
-          <div className="relative lg:col-span-5">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-xl shadow-slate-900/5 sm:aspect-[4/5]">
+          {/* Right Column: Photography com Motion suave */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
+            className="relative lg:col-span-5"
+          >
+            <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-xl shadow-slate-900/5 sm:aspect-[4/5]">
               <Image
                 src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85"
                 alt="Imóvel exclusivo em Saquarema"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/80 via-transparent to-transparent" />
 
-              <div className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
+                className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6"
+              >
                 <span className="text-[10px] font-semibold tracking-wider text-emerald-300 uppercase sm:text-xs">
                   Destaque Beira-Lagoa
                 </span>
@@ -97,13 +127,18 @@ export function Hero({ onFilterChange }: HeroProps) {
                 <span className="mt-1 block font-display text-base font-semibold tabular-nums text-white sm:mt-2 sm:text-lg">
                   R$ 1.450.000
                 </span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Tactile Search Bar - 100% mobile touch friendly */}
-        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/5 sm:mt-12 lg:p-6">
+        {/* Tactile Search Bar com Motion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.25, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/5 sm:mt-12 lg:p-6"
+        >
           <form onSubmit={handleSearch} className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-12 md:items-end md:gap-4">
             {/* Transaction Segmented Control */}
             <div className="sm:col-span-2 md:col-span-3">
@@ -176,15 +211,18 @@ export function Hero({ onFilterChange }: HeroProps) {
 
             {/* Action Submit */}
             <div className="sm:col-span-2 md:col-span-3">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 type="submit"
-                className="h-11 w-full rounded-lg bg-[#0B131F] text-sm font-semibold tracking-wide text-white transition-all hover:bg-[#162438] active:scale-[0.99]"
+                className="h-11 w-full rounded-lg bg-[#0B131F] text-sm font-semibold tracking-wide text-white shadow-sm transition-colors hover:bg-[#162438]"
               >
                 Filtrar Oportunidades
-              </button>
+              </motion.button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

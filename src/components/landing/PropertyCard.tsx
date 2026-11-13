@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { VivaRealProperty } from "@/types/viva-real";
 import { formatBRL, buildWhatsAppLink } from "@/services/property-service";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +19,13 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
   if (featured) {
     // 16:9 Widescreen Asymmetrical Editorial Hero Property
     return (
-      <article className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-slate-900/5 transition-all duration-300 hover:border-slate-300">
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-slate-900/5 transition-all duration-300 hover:border-slate-300"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* Media Container (7 cols) */}
           <Link
@@ -28,7 +37,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               alt={property.title}
               fill
               sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 sm:top-4 sm:left-4 sm:gap-2">
               {property.tag && (
@@ -112,25 +121,34 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
                 >
                   Ver Imóvel
                 </Link>
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
                   href={buildWhatsAppLink(property)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-10 items-center justify-center rounded-lg bg-[#0E7058] px-3 text-center text-xs font-semibold tracking-wide text-white transition-all hover:bg-[#09503E] active:scale-[0.98] sm:px-4"
+                  className="inline-flex h-10 items-center justify-center rounded-lg bg-[#0E7058] px-3 text-center text-xs font-semibold tracking-wide text-white transition-colors hover:bg-[#09503E] sm:px-4"
                 >
                   WhatsApp
-                </a>
+                </motion.a>
               </div>
             </div>
           </div>
         </div>
-      </article>
+      </motion.article>
     );
   }
 
-  // Vertical Architectural Card
+  // Vertical Architectural Card com Microinterações de Hover
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5">
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+      whileHover={{ y: -4 }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-shadow duration-300 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5"
+    >
       {/* Media with Badges */}
       <Link
         href={`/imoveis/${property.slug}`}
@@ -141,7 +159,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           alt={property.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
         <div className="absolute top-3 left-3 flex gap-1.5">
           {property.tag && (
@@ -217,17 +235,19 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
             >
               Ficha
             </Link>
-            <a
+            <motion.a
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.95 }}
               href={buildWhatsAppLink(property)}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md bg-[#0B131F] px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#0E7058] sm:px-3"
             >
               WhatsApp
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

@@ -11,7 +11,7 @@ export function Footer() {
           <div className="lg:col-span-5">
             <div className="relative h-12 w-36 overflow-hidden rounded bg-white p-1">
               <Image
-                src="/images/gisele-logo.jpg"
+                src="/images/gisele-logo.png"
                 alt="Gisele S. Andrade Imóveis"
                 fill
                 className="object-contain"

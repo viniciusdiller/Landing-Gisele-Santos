@@ -24,7 +24,7 @@ export function AboutBroker() {
               <div className="flex items-center gap-3">
                 <div className="relative h-9 w-20 overflow-hidden">
                   <Image
-                    src="/images/gisele-logo.jpg"
+                    src="/images/gisele-logo.png"
                     alt="Logo"
                     fill
                     className="object-contain"

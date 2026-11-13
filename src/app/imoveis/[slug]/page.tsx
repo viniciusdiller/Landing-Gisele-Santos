@@ -369,7 +369,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <div className="flex items-center gap-3 border-b border-slate-100 pb-5">
                   <div className="relative h-12 w-28 overflow-hidden">
                     <Image
-                      src="/images/gisele-logo.jpg"
+                      src="/images/gisele-logo.png"
                       alt="Logo Gisele Andrade"
                       fill
                       className="object-contain"

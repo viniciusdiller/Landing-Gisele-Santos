@@ -12,7 +12,7 @@ export function Header() {
         <Link href="/" className="group flex items-center gap-3.5">
           <div className="relative h-12 w-28 overflow-hidden rounded-md bg-white p-1 shadow-sm transition-transform duration-200 group-hover:scale-105 sm:w-36">
             <Image
-              src="/images/gisele-logo.jpg"
+              src="/images/gisele-logo.png"
               alt="Gisele S. Andrade Imóveis"
               fill
               priority

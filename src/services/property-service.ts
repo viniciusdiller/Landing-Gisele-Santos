@@ -1,13 +1,28 @@
 import { MOCK_IMOVEIS } from "@/data/mocks/viva-real-mock";
 import { Imovel } from "@/types/viva-real";
 
+export type SortOption = "relevance" | "price-asc" | "price-desc" | "area-desc";
+
 export interface PropertyFilterOptions {
   neighborhood?: string;
   propertyType?: string;
   transactionType?: "For Sale" | "For Rent";
+  minPrice?: number;
   maxPrice?: number;
   minBedrooms?: number;
   acceptsFinancing?: boolean;
+  sortBy?: SortOption;
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginatedPropertiesResult {
+  items: Imovel[];
+  total: number;
+  currentPage: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 }
 
 export function getAllProperties(): Imovel[] {
@@ -27,7 +42,7 @@ export function getSecondaryProperties(): Imovel[] {
 }
 
 export function filterProperties(options: PropertyFilterOptions): Imovel[] {
-  return MOCK_IMOVEIS.filter((property) => {
+  let list = MOCK_IMOVEIS.filter((property) => {
     if (options.neighborhood && options.neighborhood !== "Todos") {
       if (property.localizacao.bairro.toLowerCase() !== options.neighborhood.toLowerCase()) {
         return false;
@@ -35,7 +50,6 @@ export function filterProperties(options: PropertyFilterOptions): Imovel[] {
     }
 
     if (options.propertyType && options.propertyType !== "Todos") {
-      // Normalização amigável de tipos (ex: "Casa", "Apartamento")
       const pType = property.tipo.toLowerCase();
       const filterType = options.propertyType.toLowerCase();
       if (!pType.includes(filterType) && !filterType.includes(pType)) {
@@ -56,6 +70,12 @@ export function filterProperties(options: PropertyFilterOptions): Imovel[] {
     }
 
     const price = property.valores.venda ?? property.valores.aluguel ?? 0;
+    if (options.minPrice && options.minPrice > 0) {
+      if (price < options.minPrice) {
+        return false;
+      }
+    }
+
     if (options.maxPrice && options.maxPrice > 0) {
       if (price > options.maxPrice) {
         return false;
@@ -70,6 +90,46 @@ export function filterProperties(options: PropertyFilterOptions): Imovel[] {
 
     return true;
   });
+
+  // Ordenação por preço / área / relevância
+  if (options.sortBy) {
+    list = [...list].sort((a, b) => {
+      const priceA = a.valores.venda ?? a.valores.aluguel ?? 0;
+      const priceB = b.valores.venda ?? b.valores.aluguel ?? 0;
+
+      if (options.sortBy === "price-asc") {
+        return priceA - priceB;
+      }
+      if (options.sortBy === "price-desc") {
+        return priceB - priceA;
+      }
+      if (options.sortBy === "area-desc") {
+        return b.estrutural.areaUtil - a.estrutural.areaUtil;
+      }
+      return 0; // relevance / natural
+    });
+  }
+
+  return list;
+}
+
+export function getPaginatedProperties(options: PropertyFilterOptions): PaginatedPropertiesResult {
+  const filtered = filterProperties(options);
+  const page = Math.max(1, options.page || 1);
+  const limit = Math.max(1, options.limit || 6);
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / limit) || 1;
+  const startIndex = (page - 1) * limit;
+  const items = filtered.slice(startIndex, startIndex + limit);
+
+  return {
+    items,
+    total,
+    currentPage: page,
+    totalPages,
+    hasNextPage: page < totalPages,
+    hasPrevPage: page > 1,
+  };
 }
 
 export function formatBRL(value?: number): string {

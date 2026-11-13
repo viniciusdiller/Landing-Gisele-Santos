@@ -9,7 +9,6 @@ import {
   getPropertyBySlug,
   formatBRL,
   buildWhatsAppLink,
-  buildFinancingSimulatorLink,
 } from "@/services/property-service";
 import { Badge } from "@/components/ui/badge";
 
@@ -40,7 +39,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
     <div className="min-h-screen bg-[#FAFAF8]">
       <Header />
 
-      {/* Sticky Contextual Top Bar com Botão de Voltar Robusto */}
+      {/* Sticky Contextual Top Bar com Botão de Voltar */}
       <div className="sticky top-20 z-30 border-b border-slate-200/90 bg-[#FAFAF8]/95 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 lg:px-10">
           <Link
@@ -63,23 +62,19 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
       <main className="py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-          {/* Top Title & Badges */}
+          {/* Top Title & Badges 100% XML */}
           <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
             <div>
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                {property.seloDestaque && (
-                  <Badge variant={property.seloDestaque === "Exclusividade" ? "amber" : "emerald"}>
-                    {property.seloDestaque}
-                  </Badge>
+                {property.tipoPublicacao === "PREMIUM" && (
+                  <Badge variant="amber">Destaque</Badge>
                 )}
                 <Badge variant="dark">Ref: {property.id}</Badge>
-                {property.situacaoJuridica && (
-                  <Badge variant="neutral">
-                    {property.situacaoJuridica}
-                  </Badge>
+                {property.status && (
+                  <Badge variant="neutral">{property.status}</Badge>
                 )}
-                {property.aceitaFinanciamento && (
-                  <Badge variant="emerald">Aceita Financiamento</Badge>
+                {property.tipo && (
+                  <Badge variant="neutral">{property.tipo}</Badge>
                 )}
               </div>
 
@@ -117,7 +112,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
 
           {/* Grid com Especificações Técnicas e Sidebar de Contato */}
           <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-12 lg:grid-cols-12 lg:gap-16">
-            {/* Coluna Principal: Informações Técnicas (8 cols) */}
+            {/* Coluna Principal: Informações Técnicas do XML (8 cols) */}
             <div className="space-y-8 sm:space-y-12 lg:col-span-8">
               {/* Barra de Especificações Numéricas Tabulares com SVGs dedicados */}
               <div className="grid grid-cols-2 gap-3 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm sm:grid-cols-4 sm:gap-4 sm:p-6">
@@ -182,21 +177,6 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Parecer Técnico Pessoal da Gisele */}
-              {property.notaCuradoria && (
-                <div className="rounded-2xl border border-emerald-200 bg-[#EBF6F2]/80 p-5 sm:p-6">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-[#0E7058]" />
-                    <span className="font-display text-xs font-bold tracking-wider text-[#0E7058] uppercase">
-                      Parecer Pessoal de Gisele Andrade • CRECI RJ 81717
-                    </span>
-                  </div>
-                  <p className="mt-2.5 text-xs leading-relaxed text-slate-700 italic sm:text-sm">
-                    &ldquo;{property.notaCuradoria}&rdquo;
-                  </p>
-                </div>
-              )}
-
               {/* Descrição Detalhada decodificada de <br> do XML */}
               <div>
                 <h3 className="font-display text-lg font-bold text-[#0B131F] sm:text-xl">
@@ -208,7 +188,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 />
               </div>
 
-              {/* Comodidades (comodidades[] extraídas do XML) */}
+              {/* Comodidades (<Features><Feature> do XML) */}
               {property.comodidades.length > 0 && (
                 <div>
                   <h3 className="font-display text-lg font-bold text-[#0B131F] sm:text-xl">
@@ -233,7 +213,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               {/* Ficha Técnica e Registral (Mapeamento dos nós <Location> e <Details>) */}
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                 <h3 className="font-display text-base font-bold text-[#0B131F] sm:text-lg">
-                  Ficha Técnica e Registral
+                  Ficha Técnica (<span className="text-slate-500 font-normal">XML VivaReal</span>)
                 </h3>
                 <div className="mt-4 grid grid-cols-1 gap-3 text-xs sm:grid-cols-2 sm:gap-4">
                   <div className="flex justify-between border-b border-slate-100 pb-2">
@@ -244,14 +224,18 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     <span className="text-slate-500">Tipo de Imóvel:</span>
                     <strong className="text-slate-800">{property.tipo}</strong>
                   </div>
-                  <div className="flex justify-between border-b border-slate-100 pb-2">
-                    <span className="text-slate-500">Situação Jurídica:</span>
-                    <strong className="text-emerald-700">{property.situacaoJuridica || "Escritura e RGI"}</strong>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-100 pb-2">
-                    <span className="text-slate-500">Posição Solar:</span>
-                    <strong className="text-slate-800">{property.estrutural.posicaoSolar || "Sol da manhã"}</strong>
-                  </div>
+                  {property.uso && (
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-slate-500">Uso:</span>
+                      <strong className="text-slate-800">{property.uso}</strong>
+                    </div>
+                  )}
+                  {property.estrutural.anoConstrucao && (
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-slate-500">Ano de Construção:</span>
+                      <strong className="text-slate-800">{property.estrutural.anoConstrucao}</strong>
+                    </div>
+                  )}
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Área Útil:</span>
                     <strong className="tabular-nums text-slate-800">{property.estrutural.areaUtil} m²</strong>
@@ -261,61 +245,29 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     <strong className="tabular-nums text-slate-800">{property.estrutural.areaTotal ? `${property.estrutural.areaTotal} m²` : "—"}</strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
-                    <span className="text-slate-500">IPTU Anual:</span>
+                    <span className="text-slate-500">IPTU:</span>
                     <strong className="tabular-nums text-slate-800">{formatBRL(property.valores.iptu)}</strong>
                   </div>
                   <div className="flex justify-between border-b border-slate-100 pb-2">
                     <span className="text-slate-500">Condomínio Mensal:</span>
                     <strong className="tabular-nums text-slate-800">{formatBRL(property.valores.condominio)}</strong>
                   </div>
+                  {property.localizacao.cep && (
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-slate-500">CEP:</span>
+                      <strong className="tabular-nums text-slate-800">{property.localizacao.cep}</strong>
+                    </div>
+                  )}
+                  {property.dataAtualizacao && (
+                    <div className="flex justify-between border-b border-slate-100 pb-2">
+                      <span className="text-slate-500">Atualizado em:</span>
+                      <strong className="tabular-nums text-slate-800">
+                        {new Date(property.dataAtualizacao).toLocaleDateString("pt-BR")}
+                      </strong>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Seção de Financiamento */}
-              {property.aceitaFinanciamento && (
-                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                  <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-                    <div>
-                      <span className="text-xs font-semibold tracking-wider text-[#0E7058] uppercase">
-                        Condições de Pagamento
-                      </span>
-                      <h3 className="mt-1 font-display text-base font-bold text-[#0B131F] sm:text-lg">
-                        Este imóvel aceita financiamento bancário
-                      </h3>
-                    </div>
-                    <span className="inline-block rounded bg-emerald-50 px-3 py-1 text-xs font-bold text-[#0E7058]">
-                      Aprovamos seu Crédito
-                    </span>
-                  </div>
-
-                  <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    Avaliamos sua documentação e cuidamos de todo o processo junto à Caixa, Itaú, Santander ou Bradesco.
-                    {property.utilizaFGTS && " Você pode utilizar o saldo do seu FGTS como parte do pagamento da entrada."}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {property.bancosDisponiveis?.map((bank, i) => (
-                      <span
-                        key={i}
-                        className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-700"
-                      >
-                        {bank}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 border-t border-slate-100 pt-4">
-                    <a
-                      href={buildFinancingSimulatorLink(property)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-[#0E7058] hover:underline sm:text-sm"
-                    >
-                      Solicitar simulação exata das parcelas para este imóvel →
-                    </a>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Sidebar Fixa de Conversão e Agendamento Direto (4 cols) */}
@@ -358,14 +310,14 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                     Agendar Visita no WhatsApp
                   </a>
 
-                  {property.aceitaFinanciamento && (
+                  {property.urlOriginal && (
                     <a
-                      href={buildFinancingSimulatorLink(property)}
+                      href={property.urlOriginal}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex min-h-[44px] w-full items-center justify-center rounded-xl border border-slate-300 text-center text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50 active:scale-[0.98]"
                     >
-                      Simular Financiamento
+                      Ver no ImobiBrasil ↗
                     </a>
                   )}
                 </div>

@@ -1,65 +1,70 @@
+// ==============================================================================
+// Tipagem 100% Espelhada no Schema XML VivaReal / ImobiBrasil (<Listing>)
+// Nenhum campo inventado: cada propriedade mapeia 1:1 para nós e atributos do XML.
+// ==============================================================================
+
 export interface Foto {
-  url: string;
-  isPrimary: boolean;
-  caption?: string;
+  url: string;         // Texto interno da tag <Item>
+  isPrimary: boolean;  // Atributo primary="true|false"
+  caption?: string;    // Atributo caption="..." (nome do arquivo original)
 }
 
 export interface ValoresImovel {
-  venda?: number;
-  aluguel?: number;
-  condominio?: number;
-  iptu?: number;
+  venda?: number;      // <ListPrice>
+  aluguel?: number;    // <RentalPrice>
+  condominio?: number; // <PropertyAdministrationFee>
+  iptu?: number;       // <YearlyTax> ou <Iptu>
 }
 
 export interface EstruturalImovel {
-  areaUtil: number;
-  areaTotal?: number;
-  anoConstrucao?: number;
-  quartos: number;
-  banheiros: number;
-  suites: number;
-  vagas: number;
-  posicaoSolar?: "Manhã" | "Tarde" | "Nascente";
+  areaUtil: number;      // <LivingArea>
+  areaTotal?: number;    // <LotArea>
+  anoConstrucao?: number;// <YearBuilt>
+  quartos: number;       // <Bedrooms>
+  banheiros: number;     // <Bathrooms>
+  suites: number;        // <Suites>
+  vagas: number;         // <Garage>
 }
 
 export interface LocalizacaoImovel {
-  cep: string;
-  pais?: string;
-  estado: string;
-  cidade: string;
-  bairro: string;
-  rua: string;
-  numero: string;
-  complemento?: string;
-  lat?: number;
-  lng?: number;
-  pontosProximos?: string[];
+  pais: string;          // <Country>
+  estado: string;        // <State>
+  cidade: string;        // <City>
+  bairro: string;        // <Neighborhood>
+  rua: string;           // <Address>
+  numero: string;        // <StreetNumber>
+  complemento?: string;  // <Complement>
+  cep: string;           // <PostalCode>
+  lat?: number;          // <Latitude>
+  lng?: number;          // <Longitude>
 }
 
 export interface Imovel {
-  id: string;
-  slug: string;
-  titulo: string;
-  descricao: string; // Já decodificada de entidades HTML (&lt;br&gt;)
-  finalidade: "For Sale" | "For Rent";
-  tipo: string;
-  tipoPublicacao?: "STANDARD" | "PREMIUM" | "HIGHLIGHT";
-  status?: string;
-  urlOriginal?: string;
-  
-  valores: ValoresImovel;
-  estrutural: EstruturalImovel;
+  // Informações Principais (Raiz <Listing>)
+  id: string;                                   // <ListingID> (ex: "185_2-4483747")
+  slug: string;                                 // Derivado no parser a partir do id / título
+  titulo: string;                               // <Title>
+  descricao: string;                            // <Description> (texto com <br> parseado)
+  finalidade: "For Sale" | "For Rent";          // <TransactionType>
+  tipo: string;                                 // <PropertyType> (ex: "Residential / Apartment")
+  uso?: string;                                 // <UsageType> (ex: "Residential")
+  tipoPublicacao?: "STANDARD" | "PREMIUM";      // <PublicationType>
+  status?: string;                              // <Status><PropertyStatus> (ex: "Available")
+  dataAtualizacao?: string;                     // <Status><StatusDate>
+  urlOriginal?: string;                         // <DetailViewUrl>
+
+  // Localização (<Location>)
   localizacao: LocalizacaoImovel;
-  
-  comodidades: string[]; // Ex: ["Piscina", "Churrasqueira", "Elevador"]
-  fotos: Foto[];         // Array já ordenado, com a foto primary na posição 0
-  
-  // Metadados de conversão e curadoria da Gisele
-  seloDestaque?: "Exclusividade" | "Frente Mar" | "Oportunidade" | "Lançamento" | "Vista Lagoa";
-  notaCuradoria?: string;
-  aceitaFinanciamento: boolean;
-  aceitaPermuta?: boolean;
-  utilizaFGTS?: boolean;
-  bancosDisponiveis?: string[];
-  situacaoJuridica?: "Escritura e RGI" | "Em fase de averbação" | "Posse regularizada com histórico";
+
+  // Detalhes Estruturais (<Details>)
+  estrutural: EstruturalImovel;
+
+  // Valores Financeiros (<Details>)
+  valores: ValoresImovel;
+
+  // Comodidades (<Features><Feature>)
+  comodidades: string[];                        // Array de <Feature> do XML
+
+  // Imagens (<Media><Item>)
+  fotos: Foto[];                                // Array de fotos do XML com primary na pos 0
 }

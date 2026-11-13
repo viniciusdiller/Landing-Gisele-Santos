@@ -10,7 +10,6 @@ export interface PropertyFilterOptions {
   minPrice?: number;
   maxPrice?: number;
   minBedrooms?: number;
-  acceptsFinancing?: boolean;
   sortBy?: SortOption;
   page?: number;
   limit?: number;
@@ -63,12 +62,6 @@ export function filterProperties(options: PropertyFilterOptions): Imovel[] {
       }
     }
 
-    if (options.acceptsFinancing) {
-      if (!property.aceitaFinanciamento) {
-        return false;
-      }
-    }
-
     const price = property.valores.venda ?? property.valores.aluguel ?? 0;
     if (options.minPrice && options.minPrice > 0) {
       if (price < options.minPrice) {
@@ -106,7 +99,7 @@ export function filterProperties(options: PropertyFilterOptions): Imovel[] {
       if (options.sortBy === "area-desc") {
         return b.estrutural.areaUtil - a.estrutural.areaUtil;
       }
-      return 0; // relevance / natural
+      return 0;
     });
   }
 
@@ -160,15 +153,6 @@ export function buildWhatsAppLink(property?: Imovel, context?: string): string {
   const price = formatBRL(property.valores.venda ?? property.valores.aluguel);
   const text = encodeURIComponent(
     `Olá Gisele! Vi no seu site o imóvel ref: ${property.id} (${property.titulo} em ${property.localizacao.bairro} - ${price}). Gostaria de tirar dúvidas sobre a documentação e agendar uma visita.`
-  );
-  return `https://wa.me/${phone}?text=${text}`;
-}
-
-export function buildFinancingSimulatorLink(property: Imovel): string {
-  const phone = "5522999132185";
-  const price = formatBRL(property.valores.venda);
-  const text = encodeURIComponent(
-    `Olá Gisele! Gostaria de fazer uma simulação de financiamento bancário para o imóvel ref: ${property.id} (${property.titulo} no valor de ${price}). Quais bancos parceiros você recomenda?`
   );
   return `https://wa.me/${phone}?text=${text}`;
 }

@@ -40,18 +40,11 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 sm:top-4 sm:left-4 sm:gap-2">
-              {property.seloDestaque && (
-                <Badge variant={property.seloDestaque === "Exclusividade" ? "amber" : "emerald"}>
-                  {property.seloDestaque}
-                </Badge>
+              {property.tipoPublicacao === "PREMIUM" && (
+                <Badge variant="amber">Destaque</Badge>
               )}
               <Badge variant="dark">Ref: {property.id}</Badge>
             </div>
-            {property.aceitaFinanciamento && (
-              <div className="absolute bottom-3 left-3 rounded-md bg-[#0B131F]/90 px-2.5 py-1 text-[10px] font-semibold text-emerald-300 backdrop-blur-sm sm:text-[11px]">
-                Aceita Financiamento Bancário
-              </div>
-            )}
           </Link>
 
           {/* Editorial Content (5 cols) */}
@@ -69,28 +62,16 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
                 </h3>
               </Link>
 
-              {/* Descrição limpa (removendo tags br para preview) */}
+              {/* Descrição limpa vinda do nó <Description> do XML */}
               <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-slate-600 sm:mt-4 sm:text-sm">
                 {property.descricao.replace(/<br\s*\/?>/gi, " ")}
               </p>
 
-              {/* Curator Note Box */}
-              {property.notaCuradoria && (
-                <div className="mt-4 rounded-xl border border-emerald-100 bg-[#EBF6F2]/70 p-3 sm:mt-5 sm:p-3.5">
-                  <span className="block text-[10px] font-bold tracking-wider text-[#0E7058] uppercase">
-                    Parecer de Gisele Andrade
-                  </span>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-700 italic">
-                    &ldquo;{property.notaCuradoria}&rdquo;
-                  </p>
-                </div>
-              )}
-
-              {/* Metric Badges */}
-              <div className="mt-4 flex flex-wrap gap-1.5 text-xs font-medium text-slate-700 sm:mt-5 sm:gap-2">
+              {/* Metric Badges extraídas de <LivingArea>, <Bedrooms> e <Garage> */}
+              <div className="mt-5 flex flex-wrap gap-1.5 text-xs font-medium text-slate-700 sm:gap-2">
                 {property.estrutural.areaUtil > 0 && (
                   <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 tabular-nums sm:px-3 sm:py-1.5">
-                    <strong>{property.estrutural.areaUtil}</strong> m² privativos
+                    <strong>{property.estrutural.areaUtil}</strong> m² úteis
                   </span>
                 )}
                 {property.estrutural.quartos > 0 && (
@@ -165,18 +146,11 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
         <div className="absolute top-3 left-3 flex gap-1.5">
-          {property.seloDestaque && (
-            <Badge variant={property.seloDestaque === "Exclusividade" ? "amber" : "emerald"}>
-              {property.seloDestaque}
-            </Badge>
+          {property.tipoPublicacao === "PREMIUM" && (
+            <Badge variant="amber">Destaque</Badge>
           )}
           <Badge variant="dark">Ref: {property.id}</Badge>
         </div>
-        {property.aceitaFinanciamento && (
-          <div className="absolute bottom-3 left-3 rounded bg-[#0B131F]/90 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 backdrop-blur-sm">
-            Financiável
-          </div>
-        )}
       </Link>
 
       {/* Card Content */}
@@ -244,7 +218,7 @@ export function PropertyCard({ property, featured = false }: PropertyCardProps) 
               href={buildWhatsAppLink(property)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md bg-[#0B131F] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#0E7058]"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md bg-[#0E7058] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#09503E]"
             >
               WhatsApp
             </motion.a>

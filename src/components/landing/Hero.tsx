@@ -25,58 +25,58 @@ export function Hero({ onFilterChange }: HeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Asymmetrical two-column hero layout */}
-        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-8">
+    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        {/* Asymmetrical Hero Layout */}
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12 lg:gap-8">
           {/* Left Column: Bold Typographic Headline (7 cols) */}
           <div className="lg:col-span-7">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold tracking-wider text-slate-700 uppercase">
               Curadoria Imobiliária em Saquarema • RJ
             </div>
 
-            <h1 className="font-display text-4xl leading-[1.08] font-bold tracking-tight text-[#0B131F] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl leading-[1.1] font-bold tracking-tight text-[#0B131F] sm:text-5xl lg:text-6xl">
               Imóveis com alma entre o mar e a tranquilidade da lagoa.
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:mt-6 sm:text-base lg:text-lg">
               Sem burocracia genérica e sem promessas vazias. Selecionamos apenas
               propriedades com documentação rigorosamente auditada, acabamento de
               verdade e localização privilegiada na Região dos Lagos.
             </p>
 
-            {/* Quick Stat Anchors - Technical figures without noisy icons */}
-            <div className="mt-8 grid grid-cols-3 gap-6 border-t border-slate-200/90 pt-6">
+            {/* Quick Stat Anchors - Responsivo com wrap limpo */}
+            <div className="mt-6 grid grid-cols-3 gap-3 border-t border-slate-200/90 pt-5 sm:gap-6 sm:pt-6">
               <div>
-                <span className="font-display text-2xl font-bold tracking-tight text-[#0B131F] sm:text-3xl">
+                <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   R$ 85M+
                 </span>
-                <span className="mt-1 block text-xs font-medium text-slate-500">
+                <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Em patrimônio avaliado
                 </span>
               </div>
               <div>
-                <span className="font-display text-2xl font-bold tracking-tight text-[#0B131F] sm:text-3xl">
+                <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   100%
                 </span>
-                <span className="mt-1 block text-xs font-medium text-slate-500">
-                  Imóveis com RGI regular
+                <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
+                  Imóveis com RGI
                 </span>
               </div>
               <div>
-                <span className="font-display text-2xl font-bold tracking-tight text-[#0B131F] sm:text-3xl">
+                <span className="font-display text-xl font-bold tracking-tight text-[#0B131F] sm:text-2xl lg:text-3xl">
                   Lake&apos;s
                 </span>
-                <span className="mt-1 block text-xs font-medium text-slate-500">
+                <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
                   Shopping • Loja 23
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: High-Res Editorial Photography with Overlapping Angles (5 cols) */}
+          {/* Right Column: High-Res Editorial Photography */}
           <div className="relative lg:col-span-5">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-xl shadow-slate-900/5">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-xl shadow-slate-900/5 sm:aspect-[4/5]">
               <Image
                 src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85"
                 alt="Imóvel exclusivo em Saquarema"
@@ -85,39 +85,29 @@ export function Hero({ onFilterChange }: HeroProps) {
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/80 via-transparent to-transparent" />
 
-              <div className="absolute right-6 bottom-6 left-6 text-white">
-                <span className="text-[11px] font-semibold tracking-wider text-emerald-300 uppercase">
+              <div className="absolute right-4 bottom-4 left-4 text-white sm:right-6 sm:bottom-6 sm:left-6">
+                <span className="text-[10px] font-semibold tracking-wider text-emerald-300 uppercase sm:text-xs">
                   Destaque Beira-Lagoa
                 </span>
-                <h3 className="mt-1 font-display text-xl font-bold leading-tight">
+                <h3 className="mt-1 font-display text-lg font-bold leading-tight sm:text-xl">
                   Porto da Roça • Pier Privativo
                 </h3>
-                <span className="mt-2 block font-display text-lg font-semibold tabular-nums text-white">
+                <span className="mt-1 block font-display text-base font-semibold tabular-nums text-white sm:mt-2 sm:text-lg">
                   R$ 1.450.000
                 </span>
               </div>
             </div>
-
-            {/* Overlapping Floating Tag */}
-            <div className="absolute -top-4 -left-4 hidden rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:block">
-              <span className="block text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-                CRECI RJ 81717
-              </span>
-              <span className="font-display text-sm font-bold text-[#0B131F]">
-                Gisele S. Andrade
-              </span>
-            </div>
           </div>
         </div>
 
-        {/* Tactile Search Bar - High Contrast, Clean, No Slop */}
-        <div className="mt-12 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/5 lg:p-6">
-          <form onSubmit={handleSearch} className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-end">
+        {/* Tactile Search Bar - 100% mobile touch friendly */}
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/5 sm:mt-12 lg:p-6">
+          <form onSubmit={handleSearch} className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-12 md:items-end md:gap-4">
             {/* Transaction Segmented Control */}
-            <div className="md:col-span-3">
-              <label className="mb-2 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            <div className="sm:col-span-2 md:col-span-3">
+              <label className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 Finalidade
               </label>
               <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
@@ -148,7 +138,7 @@ export function Hero({ onFilterChange }: HeroProps) {
 
             {/* Neighborhood Selector */}
             <div className="md:col-span-3">
-              <label className="mb-2 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              <label className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 Região / Bairro
               </label>
               <select
@@ -168,7 +158,7 @@ export function Hero({ onFilterChange }: HeroProps) {
 
             {/* Property Type Selector */}
             <div className="md:col-span-3">
-              <label className="mb-2 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              <label className="mb-1.5 block text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 Tipo de Imóvel
               </label>
               <select
@@ -185,7 +175,7 @@ export function Hero({ onFilterChange }: HeroProps) {
             </div>
 
             {/* Action Submit */}
-            <div className="md:col-span-3">
+            <div className="sm:col-span-2 md:col-span-3">
               <button
                 type="submit"
                 className="h-11 w-full rounded-lg bg-[#0B131F] text-sm font-semibold tracking-wide text-white transition-all hover:bg-[#162438] active:scale-[0.99]"

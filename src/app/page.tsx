@@ -6,7 +6,6 @@ import { Hero } from "@/components/landing/Hero";
 import { PropertyCard } from "@/components/landing/PropertyCard";
 import { Neighborhoods } from "@/components/landing/Neighborhoods";
 import { AboutBroker } from "@/components/landing/AboutBroker";
-import { FinancingSection } from "@/components/landing/FinancingSection";
 import { SellersCTA } from "@/components/landing/SellersCTA";
 import { Footer } from "@/components/landing/Footer";
 import {
@@ -92,9 +91,6 @@ export default function Home() {
 
       {/* Sobre mim (Gisele Andrade) */}
       <AboutBroker />
-
-      {/* Seção de Financiamento Bancário */}
-      <FinancingSection />
 
       {/* Chamada para Proprietários */}
       <SellersCTA />

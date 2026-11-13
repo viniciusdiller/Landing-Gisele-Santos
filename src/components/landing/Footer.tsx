@@ -102,10 +102,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#financiamento"
+                  href="/#proprietarios"
                   className="inline-flex min-h-[44px] items-center text-slate-400 transition-colors duration-150 hover:text-white"
                 >
-                  Simular Financiamento
+                  Anunciar Imóvel
                 </Link>
               </li>
             </ul>

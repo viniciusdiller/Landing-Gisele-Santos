@@ -10,11 +10,10 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: "Imóveis Selecionados", href: "/#imoveis", count: "06" },
-    { label: "Regiões de Saquarema", href: "/#bairros", count: "05" },
-    { label: "Sobre mim", href: "/#sobre-mim", count: "CRECI" },
-    { label: "Simulação de Financiamento", href: "/#financiamento", count: "Bancos" },
-    { label: "Anunciar Imóvel", href: "/#proprietarios", count: "Venda" },
+    { label: "Imóveis", href: "/#imoveis" },
+    { label: "Regiões", href: "/#bairros" },
+    { label: "Sobre mim", href: "/#sobre-mim" },
+    { label: "Anunciar Imóvel", href: "/#proprietarios" },
   ];
 
   return (
@@ -46,16 +45,16 @@ export function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation com Hover Indicators táteis */}
-        <nav className="hidden items-center gap-6 lg:gap-8 md:flex">
+        {/* Desktop Navigation com Labels Diretas em Linha Única */}
+        <nav className="hidden items-center gap-7 lg:gap-9 md:flex">
           {menuItems.map((item, idx) => (
             <Link
               key={idx}
               href={item.href}
-              className="group relative inline-flex min-h-[44px] items-center text-sm font-medium text-slate-600 transition-colors duration-150 hover:text-[#0B131F]"
+              className="group relative inline-flex items-center py-2 text-sm font-medium whitespace-nowrap text-slate-600 transition-colors duration-150 hover:text-[#0B131F]"
             >
-              {item.label}
-              <span className="absolute bottom-2 left-0 h-[2px] w-0 bg-[#0E7058] transition-all duration-200 group-hover:w-full" />
+              <span>{item.label}</span>
+              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#0E7058] transition-all duration-200 ease-out group-hover:w-full" />
             </Link>
           ))}
         </nav>
@@ -145,9 +144,7 @@ export function Header() {
                         className="flex min-h-[48px] items-center justify-between py-3 text-sm font-semibold text-slate-800 transition-colors duration-150 active:text-[#0E7058]"
                       >
                         <span>{item.label}</span>
-                        <span className="rounded bg-slate-100 px-2 py-0.5 font-display text-[11px] font-bold text-slate-500">
-                          {item.count}
-                        </span>
+                        <span className="text-slate-400">→</span>
                       </Link>
                     </motion.div>
                   ))}

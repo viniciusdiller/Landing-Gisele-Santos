@@ -7,14 +7,14 @@ export function Footer() {
     <footer className="border-t border-slate-800 bg-[#070C14] py-16 text-slate-400">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12">
-          {/* Identity column com a Logo Real */}
+          {/* Identity column com a Logo Branca Oficial em Section Escura */}
           <div className="lg:col-span-5">
-            <div className="relative h-12 w-36 overflow-hidden rounded bg-white p-1">
+            <div className="relative h-16 w-44">
               <Image
-                src="/images/gisele-logo.png"
+                src="/images/gisele-logo-white.png"
                 alt="Gisele S. Andrade Imóveis"
                 fill
-                className="object-contain"
+                className="object-contain object-left"
               />
             </div>
             <div className="mt-3">

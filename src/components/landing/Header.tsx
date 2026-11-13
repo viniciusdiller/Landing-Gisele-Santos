@@ -11,15 +11,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-[#FAFAF8]/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
-        {/* Brand identity com a Logo Real */}
+        {/* Brand identity com a Logo Real sem box branca */}
         <Link href="/" className="group flex items-center gap-3">
-          <div className="relative h-11 w-28 overflow-hidden rounded-md bg-white p-1 shadow-sm transition-transform duration-200 group-hover:scale-105 sm:h-12 sm:w-36">
+          <div className="relative h-12 w-32 transition-transform duration-200 group-hover:scale-105 sm:h-14 sm:w-40">
             <Image
               src="/images/gisele-logo.png"
               alt="Gisele S. Andrade Imóveis"
               fill
               priority
-              className="object-contain"
+              className="object-contain object-left"
             />
           </div>
           <div className="hidden border-l border-slate-200 pl-3 sm:flex sm:flex-col">

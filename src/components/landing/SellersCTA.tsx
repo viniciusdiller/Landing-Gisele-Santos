@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { buildWhatsAppLink } from "@/services/property-service";
 
 export function SellersCTA() {
@@ -12,6 +13,14 @@ export function SellersCTA() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
+            <div className="mb-4 relative h-12 w-36">
+              <Image
+                src="/images/gisele-logo-white.png"
+                alt="Gisele Andrade"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
             <span className="text-xs font-semibold tracking-wider text-emerald-400 uppercase">
               Para Proprietários de Saquarema
             </span>

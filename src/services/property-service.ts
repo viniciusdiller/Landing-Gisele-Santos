@@ -7,10 +7,15 @@ export interface PropertyFilterOptions {
   transactionType?: "Sale" | "Rent";
   maxPrice?: number;
   minBedrooms?: number;
+  acceptsFinancing?: boolean;
 }
 
 export function getAllProperties(): VivaRealProperty[] {
   return MOCK_PROPERTIES;
+}
+
+export function getPropertyBySlug(slug: string): VivaRealProperty | undefined {
+  return MOCK_PROPERTIES.find((p) => p.slug === slug || p.listingId === slug);
 }
 
 export function getHighlightProperty(): VivaRealProperty {
@@ -41,6 +46,12 @@ export function filterProperties(options: PropertyFilterOptions): VivaRealProper
       }
     }
 
+    if (options.acceptsFinancing) {
+      if (!property.price.acceptsFinancing) {
+        return false;
+      }
+    }
+
     if (options.maxPrice && options.maxPrice > 0) {
       if (property.price.amount > options.maxPrice) {
         return false;
@@ -65,17 +76,27 @@ export function formatBRL(value: number): string {
   }).format(value);
 }
 
-export function buildWhatsAppLink(property?: VivaRealProperty): string {
+export function buildWhatsAppLink(property?: VivaRealProperty, context?: string): string {
   const phone = "5522999132185";
   if (!property) {
     const text = encodeURIComponent(
-      "Olá Gisele, tudo bem? Gostaria de conversar sobre consultoria e busca de imóveis em Saquarema."
+      context
+        ? `Olá Gisele, tudo bem? Gostaria de informações sobre: ${context}`
+        : "Olá Gisele, tudo bem? Gostaria de conversar sobre consultoria e busca de imóveis em Saquarema."
     );
     return `https://wa.me/${phone}?text=${text}`;
   }
 
   const text = encodeURIComponent(
-    `Olá Gisele! Vi no seu site o imóvel ref: ${property.listingId} (${property.title} em ${property.address.neighborhood} - ${formatBRL(property.price.amount)}). Poderia me passar mais detalhes e disponibilidade para visita?`
+    `Olá Gisele! Vi no seu site o imóvel ref: ${property.listingId} (${property.title} em ${property.address.neighborhood} - ${formatBRL(property.price.amount)}). Gostaria de tirar dúvidas sobre a documentação e agendar uma visita.`
+  );
+  return `https://wa.me/${phone}?text=${text}`;
+}
+
+export function buildFinancingSimulatorLink(property: VivaRealProperty): string {
+  const phone = "5522999132185";
+  const text = encodeURIComponent(
+    `Olá Gisele! Gostaria de fazer uma simulação de financiamento bancário para o imóvel ref: ${property.listingId} (${property.title} no valor de ${formatBRL(property.price.amount)}). Quais bancos parceiros você recomenda?`
   );
   return `https://wa.me/${phone}?text=${text}`;
 }

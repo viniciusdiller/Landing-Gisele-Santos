@@ -3,12 +3,12 @@ import { buildWhatsAppLink } from "@/services/property-service";
 
 export function AboutBroker() {
   return (
-    <section id="sobre" className="border-t border-slate-200/80 bg-[#FAFAF8] py-20 lg:py-28">
+    <section id="sobre-mim" className="border-t border-slate-200/80 bg-[#FAFAF8] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Portrait Container with Overlapping Offset (5 cols) */}
+          {/* Portrait Container com enquadramento autêntico (5 cols) */}
           <div className="relative mx-auto w-full max-w-md lg:col-span-5">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-200 shadow-2xl shadow-slate-900/10">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-200 shadow-xl shadow-slate-900/10">
               <Image
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=85"
                 alt="Gisele S. Andrade - Corretora de Imóveis em Saquarema"
@@ -16,77 +16,99 @@ export function AboutBroker() {
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B131F]/50 via-transparent to-transparent" />
             </div>
 
-            {/* Credential Badge Floating Box */}
-            <div className="absolute -bottom-6 -right-4 rounded-xl border border-slate-200 bg-white p-5 shadow-xl sm:right-6">
-              <span className="block text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-                Conselho Regional
-              </span>
-              <span className="font-display text-lg font-bold text-[#0B131F]">
-                CRECI RJ 81717
-              </span>
-              <span className="mt-1 block text-xs font-semibold text-[#0E7058]">
-                Atendimento Consultivo Direto
-              </span>
+            {/* Cartão de Identificação Profissional */}
+            <div className="absolute -bottom-5 -right-3 rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:right-4">
+              <div className="flex items-center gap-3">
+                <div className="relative h-9 w-20 overflow-hidden">
+                  <Image
+                    src="/images/gisele-logo.jpg"
+                    alt="Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="border-l border-slate-200 pl-3">
+                  <span className="block text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                    Registro Profissional
+                  </span>
+                  <span className="font-display text-sm font-bold text-[#0B131F]">
+                    CRECI RJ 81717
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Editorial Authority Text (7 cols) */}
+          {/* Texto em Primeira Pessoa: Humano, Pragmático, Sem Fórmulas de IA (7 cols) */}
           <div className="lg:col-span-7">
             <span className="text-xs font-semibold tracking-wider text-[#0E7058] uppercase">
-              Autoridade e Presença Local
+              Sobre mim
             </span>
 
-            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-[#0B131F] sm:text-4xl lg:text-5xl">
-              Negociações imobiliárias conduzidas com rigor, transparência e endereço fixo.
+            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-[#0B131F] sm:text-4xl">
+              Eu não vendo promessas. Vendo imóveis com endereço certo, chave na mão e documento na mesa.
             </h2>
 
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-600">
+            <div className="mt-6 space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
               <p>
-                Com sede estabelecida no <strong>Lake&apos;s Shopping</strong>, no coração de
-                Porto Novo, <strong>Gisele S. Andrade</strong> construiu sua reputação no
-                mercado de Saquarema com base em uma premissa simples: nenhum imóvel entra no
-                portfólio sem uma verificação jurídica e documental prévia minuciosa.
+                Quem procura imóvel em Saquarema e na Região dos Lagos logo percebe um problema
+                recorrente: anúncios de posse precária, loteamentos irregulares e corretores que
+                somem na primeira pergunta técnica sobre a certidão de ônus reais.
               </p>
               <p>
-                Em uma região onde muitos compradores enfrentam inseguranças com
-                posses e loteamentos irregulares, a curadoria da Gisele garante a aquisição
-                exclusiva de bens com <strong>Escritura Definitiva e RGI</strong>, além de suporte
-                completo a financiamentos bancários pela Caixa e bancos privados.
+                Eu trabalho de forma diferente. Atendo pessoalmente na minha loja no{" "}
+                <strong>Lake&apos;s Shopping</strong> (Loja 23, em Porto Novo). Cada casa,
+                terreno ou apartamento que entra na minha carteira passa primeiro por uma
+                conferência rigorosa de RGI, escritura e viabilidade de financiamento bancário.
+              </p>
+              <p>
+                Se você está vindo da capital, de outro estado ou já mora aqui e quer trocar
+                de casa, eu conduzo todo o processo com você — desde a escolha do bairro ideal
+                até a entrega das chaves no cartório.
               </p>
             </div>
 
-            {/* Pillars of trust without cheesy icons */}
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-200/80 bg-white p-4">
-                <span className="font-display text-sm font-bold text-[#0B131F]">
-                  Auditoria de Documentação
+            {/* Três pontos práticos da atuação */}
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+                <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
+                  Endereço Físico
                 </span>
                 <p className="mt-1 text-xs text-slate-500">
-                  Checagem prévia de certidões, ônus e histórico de matrícula antes da visita.
+                  Lake&apos;s Shopping, loja 23. Você sabe exatamente onde me encontrar.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200/80 bg-white p-4">
-                <span className="font-display text-sm font-bold text-[#0B131F]">
-                  Atendimento Pessoal
+              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+                <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
+                  Auditoria de RGI
                 </span>
                 <p className="mt-1 text-xs text-slate-500">
-                  Você conversa diretamente com a corretora responsável, sem repasses ou intermediários.
+                  Sem dor de cabeça futura com cartórios ou prefeitura.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-slate-200/90 bg-white p-4">
+                <span className="font-display text-xs font-bold text-[#0B131F] uppercase">
+                  Correspondente
+                </span>
+                <p className="mt-1 text-xs text-slate-500">
+                  Agilidade na aprovação de crédito na Caixa e bancos privados.
                 </p>
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                href={buildWhatsAppLink()}
+                href={buildWhatsAppLink(undefined, "Gostaria de agendar um café no Lake's Shopping para conversar sobre imóveis.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-[#0B131F] px-6 text-xs font-semibold tracking-wider text-white uppercase transition-colors hover:bg-[#162438]"
+                className="inline-flex h-11 items-center justify-center rounded-lg bg-[#0B131F] px-6 text-xs font-semibold tracking-wider text-white uppercase transition-colors hover:bg-[#162438]"
               >
-                Conversar Diretamente com a Gisele
+                Falar Diretamente Comigo
               </a>
               <span className="text-xs text-slate-500">
                 Av. Saquarema, 567 • Loja 23 (Lake&apos;s Shopping)

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { buildWhatsAppLink } from "@/services/property-service";
 
 export function Footer() {
@@ -6,20 +7,23 @@ export function Footer() {
     <footer className="border-t border-slate-800 bg-[#070C14] py-16 text-slate-400">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12">
-          {/* Identity column (5 cols) */}
+          {/* Identity column com a Logo Real */}
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-[#0B131F]">
-                <span className="font-display font-bold">GA</span>
-              </div>
-              <div>
-                <span className="font-display text-base font-bold text-white">
-                  GISELE S. ANDRADE
-                </span>
-                <span className="block text-xs text-slate-400">
-                  Corretora de Imóveis • CRECI RJ 81717
-                </span>
-              </div>
+            <div className="relative h-12 w-36 overflow-hidden rounded bg-white p-1">
+              <Image
+                src="/images/gisele-logo.jpg"
+                alt="Gisele S. Andrade Imóveis"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="mt-3">
+              <span className="font-display text-sm font-bold text-white">
+                GISELE S. ANDRADE IMÓVEIS
+              </span>
+              <span className="block text-xs text-slate-400">
+                Corretora de Imóveis • CRECI RJ 81717
+              </span>
             </div>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-slate-400">
               Intermediação imobiliária transparente em Saquarema, Itaúna, Gravatá,
@@ -39,7 +43,7 @@ export function Footer() {
               </li>
               <li>Porto Novo / Centro — Saquarema / RJ — CEP 28991-311</li>
               <li className="pt-2">
-                <strong>WhatsApp / Tel:</strong> (22) 99913-2185
+                <strong>WhatsApp / Telefone:</strong> (22) 99913-2185
               </li>
               <li>
                 <strong>E-mail:</strong> giselesandradeimoveis@gmail.com
@@ -60,7 +64,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-white"
                 >
-                  Instagram: @giselesandradeimoveis ↗
+                  Instagram Oficial ↗
                 </a>
               </li>
               <li>
@@ -74,13 +78,18 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="#imoveis" className="transition-colors hover:text-white">
+                <Link href="/#imoveis" className="transition-colors hover:text-white">
                   Carteira de Imóveis
                 </Link>
               </li>
               <li>
-                <Link href="#sobre" className="transition-colors hover:text-white">
-                  Sobre a Corretora
+                <Link href="/#sobre-mim" className="transition-colors hover:text-white">
+                  Sobre mim
+                </Link>
+              </li>
+              <li>
+                <Link href="/#financiamento" className="transition-colors hover:text-white">
+                  Simular Financiamento
                 </Link>
               </li>
             </ul>
@@ -91,7 +100,7 @@ export function Footer() {
         <div className="mt-12 flex flex-col justify-between gap-4 border-t border-slate-800/80 pt-8 text-[11px] text-slate-500 sm:flex-row">
           <p>© {new Date().getFullYear()} Gisele S. Andrade Imóveis. Todos os direitos reservados. CRECI RJ 81717.</p>
           <p>
-            Valores sujeitos a alteração sem aviso prévio. Disponibilidade confirmada mediante consulta direta.
+            Valores sujeitos a alteração sem aviso prévio. Correspondente bancário parceiro Caixa, Itaú, Santander e Bradesco.
           </p>
         </div>
       </div>

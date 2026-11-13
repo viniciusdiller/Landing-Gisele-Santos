@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { PropertyCard } from "@/components/landing/PropertyCard";
-import { PropertyModal } from "@/components/landing/PropertyModal";
 import { Neighborhoods } from "@/components/landing/Neighborhoods";
 import { AboutBroker } from "@/components/landing/AboutBroker";
+import { FinancingSection } from "@/components/landing/FinancingSection";
 import { SellersCTA } from "@/components/landing/SellersCTA";
 import { Footer } from "@/components/landing/Footer";
 import {
@@ -14,28 +14,27 @@ import {
   filterProperties,
   PropertyFilterOptions,
 } from "@/services/property-service";
-import { VivaRealProperty } from "@/types/viva-real";
 
 export default function Home() {
   const [filters, setFilters] = useState<PropertyFilterOptions>({});
-  const [selectedProperty, setSelectedProperty] = useState<VivaRealProperty | null>(null);
 
-  const filteredProperties = Object.keys(filters).length === 0
-    ? getAllProperties()
-    : filterProperties(filters);
+  const filteredProperties =
+    Object.keys(filters).length === 0
+      ? getAllProperties()
+      : filterProperties(filters);
 
   const highlightProperty = filteredProperties[0];
   const secondaryProperties = filteredProperties.slice(1);
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
-      {/* Header Sticky */}
+      {/* Header Sticky com a Logo Real e sem status artificial */}
       <Header />
 
       {/* Hero Section */}
       <Hero onFilterChange={(newFilters) => setFilters(newFilters)} />
 
-      {/* Selected Properties Section (Asymmetrical Layout) */}
+      {/* Portfólio Selecionado - Cada card leva para a página dedicada */}
       <section id="imoveis" className="py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -52,7 +51,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* If there are no properties found */}
           {filteredProperties.length === 0 ? (
             <div className="mt-12 rounded-2xl border border-dashed border-slate-300 p-12 text-center">
               <h3 className="font-display text-lg font-bold text-slate-800">
@@ -73,22 +71,14 @@ export default function Home() {
             <div className="mt-10 space-y-8">
               {/* Highlight Property (16:9 Widescreen) */}
               {highlightProperty && (
-                <PropertyCard
-                  property={highlightProperty}
-                  featured={true}
-                  onSelect={(prop) => setSelectedProperty(prop)}
-                />
+                <PropertyCard property={highlightProperty} featured={true} />
               )}
 
               {/* Secondary Grid (Asymmetrical rhythm) */}
               {secondaryProperties.length > 0 && (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {secondaryProperties.map((property) => (
-                    <PropertyCard
-                      key={property.listingId}
-                      property={property}
-                      onSelect={(prop) => setSelectedProperty(prop)}
-                    />
+                    <PropertyCard key={property.listingId} property={property} />
                   ))}
                 </div>
               )}
@@ -97,23 +87,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Neighborhoods Guide */}
+      {/* Regiões de Saquarema */}
       <Neighborhoods />
 
-      {/* About the Broker */}
+      {/* Sobre mim (Gisele Andrade - autêntico e sem slop) */}
       <AboutBroker />
 
-      {/* Sellers Call-To-Action */}
+      {/* Seção de Financiamento Bancário (Caixa, Itaú, Santander, Bradesco) */}
+      <FinancingSection />
+
+      {/* Chamada para Proprietários */}
       <SellersCTA />
 
-      {/* Footer */}
+      {/* Footer com Logo e Dados do Lake's Shopping */}
       <Footer />
-
-      {/* Property Details Modal */}
-      <PropertyModal
-        property={selectedProperty}
-        onClose={() => setSelectedProperty(null)}
-      />
     </div>
   );
 }

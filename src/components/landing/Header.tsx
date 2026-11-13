@@ -1,67 +1,73 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { buildWhatsAppLink } from "@/services/property-service";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-[#FAFAF8]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/70 bg-[#FAFAF8]/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
-        {/* Brand identity */}
+        {/* Brand identity com a Logo Real da Gisele */}
         <Link href="/" className="group flex items-center gap-3.5">
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#0B131F] text-white transition-transform duration-200 group-hover:scale-105">
-            <span className="font-display text-lg font-bold tracking-tight text-white">
-              GA
-            </span>
+          <div className="relative h-12 w-28 overflow-hidden rounded-md bg-white p-1 shadow-sm transition-transform duration-200 group-hover:scale-105 sm:w-36">
+            <Image
+              src="/images/gisele-logo.jpg"
+              alt="Gisele S. Andrade Imóveis"
+              fill
+              priority
+              className="object-contain"
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display text-base font-bold tracking-tight text-[#0B131F]">
-              GISELE S. ANDRADE
+          <div className="hidden border-l border-slate-200 pl-3.5 sm:flex sm:flex-col">
+            <span className="font-display text-xs font-bold tracking-tight text-[#0B131F]">
+              CRECI RJ 81717
             </span>
-            <span className="text-[11px] font-medium tracking-wider text-slate-500 uppercase">
-              Imóveis em Saquarema • CRECI 81717
+            <span className="text-[10px] font-medium tracking-wider text-slate-500 uppercase">
+              Saquarema • Região dos Lagos
             </span>
           </div>
         </Link>
 
-        {/* Navigation links - clean editorial */}
+        {/* Navigation links - Direto e Editorial */}
         <nav className="hidden items-center gap-8 md:flex">
           <Link
-            href="#imoveis"
+            href="/#imoveis"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
           >
-            Imóveis Selecionados
+            Imóveis
           </Link>
           <Link
-            href="#bairros"
+            href="/#bairros"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
           >
             Regiões
           </Link>
           <Link
-            href="#sobre"
+            href="/#sobre-mim"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
           >
-            Sobre a Gisele
+            Sobre mim
           </Link>
           <Link
-            href="#proprietarios"
+            href="/#financiamento"
+            className="text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
+          >
+            Financiamento
+          </Link>
+          <Link
+            href="/#proprietarios"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-[#0B131F]"
           >
             Anunciar Imóvel
           </Link>
         </nav>
 
-        {/* WhatsApp direct CTA with live status pill */}
-        <div className="flex items-center gap-4">
-          <div className="hidden items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/70 px-3 py-1 text-xs font-medium text-emerald-800 lg:flex">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600"></span>
-            </span>
-            Disponível para atendimento
-          </div>
-
+        {/* WhatsApp direct CTA - Limpo e profissional, sem status artificial */}
+        <div className="flex items-center gap-3">
+          <span className="hidden text-xs font-medium text-slate-500 lg:inline-block">
+            (22) 99913-2185
+          </span>
           <a
             href={buildWhatsAppLink()}
             target="_blank"

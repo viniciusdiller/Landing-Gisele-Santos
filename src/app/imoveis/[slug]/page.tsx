@@ -268,6 +268,47 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   )}
                 </div>
               </div>
+
+              {/* Localização no Mapa (Google Maps Embed a partir de Latitude / Longitude do XML) */}
+              {property.localizacao.lat && property.localizacao.lng && (
+                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                  <div className="border-b border-slate-100 p-5 sm:p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-xs font-semibold tracking-wider text-[#0E7058] uppercase">
+                          Geolocalização (<span className="font-normal text-slate-400">XML Location</span>)
+                        </span>
+                        <h3 className="mt-1 font-display text-base font-bold text-[#0B131F] sm:text-lg">
+                          Localização no Mapa
+                        </h3>
+                      </div>
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${property.localizacao.lat},${property.localizacao.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[44px] items-center text-xs font-semibold text-[#0E7058] transition-colors hover:text-[#09503E] hover:underline"
+                      >
+                        Abrir no Google Maps ↗
+                      </a>
+                    </div>
+                    <p className="mt-2 text-xs text-slate-500">
+                      {property.localizacao.bairro}, {property.localizacao.cidade} - {property.localizacao.estado} • Coordenadas: {property.localizacao.lat}, {property.localizacao.lng}
+                    </p>
+                  </div>
+
+                  <div className="relative aspect-[16/9] w-full bg-slate-100 sm:aspect-[21/9]">
+                    <iframe
+                      title={`Mapa de localização de ${property.titulo}`}
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      className="border-0"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={`https://maps.google.com/maps?q=${property.localizacao.lat},${property.localizacao.lng}&hl=pt&z=15&output=embed`}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Sidebar Fixa de Conversão e Agendamento Direto (4 cols) */}

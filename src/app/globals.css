@@ -29,6 +29,8 @@ h1, h2, h3, .font-display {
 /* Scroll suave e refinado */
 html {
   scroll-behavior: smooth;
+  /* Compensa o header fixo (h-20) ao rolar até as seções */
+  scroll-padding-top: 5rem;
 }
 
 /* Custom scrollbar discreta */

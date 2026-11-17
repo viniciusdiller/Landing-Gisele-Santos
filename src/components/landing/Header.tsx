@@ -123,7 +123,7 @@ export function Header() {
                 duration: 0.28,
                 ease: [0.32, 0.72, 0, 1],
               }}
-              className="relative z-50 overflow-hidden border-b border-slate-200 bg-[#FAFAF8] shadow-2xl md:hidden"
+              className="absolute inset-x-0 top-full z-50 overflow-hidden border-b border-slate-200 bg-[#FAFAF8] shadow-2xl md:hidden"
             >
               <div className="px-5 py-6">
                 <nav className="flex flex-col divide-y divide-slate-100">

@@ -11,10 +11,10 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Gisele S. Andrade — Corretora e Consultora Imobiliária em Saquarema",
+  title: "Gisele S. Andrade | Corretora e Consultora Imobiliária em Saquarema",
   description: "Curadoria de imóveis de alto padrão e oportunidades exclusivas em Saquarema e Região dos Lagos. Casas em Itaúna, Gravatá, Vilatur e Beira-Lagoa. CRECI RJ 81717.",
   openGraph: {
-    title: "Gisele S. Andrade — Imóveis em Saquarema",
+    title: "Gisele S. Andrade | Imóveis em Saquarema",
     description: "Curadoria imobiliária pessoal e transparente. CRECI RJ 81717.",
     locale: "pt_BR",
     type: "website",

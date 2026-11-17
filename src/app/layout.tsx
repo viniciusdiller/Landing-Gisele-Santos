@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { CleanHashScroll } from "@/components/ui/CleanHashScroll";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#FAFAF8] text-[#0D161F] antialiased selection:bg-[#0E7058] selection:text-white">
+        <CleanHashScroll />
         {children}
       </body>
     </html>

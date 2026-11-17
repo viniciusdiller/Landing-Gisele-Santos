@@ -169,7 +169,7 @@ export function Header() {
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
                   </div>
                   <p className="mt-1 text-xs text-slate-500">
-                    Av. Saquarema, 567 — Porto Novo, Saquarema/RJ
+                    Av. Saquarema, 567 | Porto Novo, Saquarema/RJ
                   </p>
                 </motion.div>
               </div>

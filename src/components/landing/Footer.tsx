@@ -39,9 +39,9 @@ export function Footer() {
             </span>
             <ul className="mt-4 space-y-2.5 text-xs leading-relaxed">
               <li className="text-slate-300">
-                <strong>Lake&apos;s Shopping:</strong> Av. Saquarema, 567 — Loja 23
+                <strong>Lake&apos;s Shopping:</strong> Av. Saquarema, 567 | Loja 23
               </li>
-              <li>Porto Novo / Centro — Saquarema / RJ — CEP 28991-311</li>
+              <li>Porto Novo / Centro | Saquarema / RJ | CEP 28991-311</li>
               <li className="pt-2">
                 <a
                   href={buildWhatsAppLink()}

@@ -66,7 +66,7 @@ export function AboutBroker() {
               </p>
               <p>
                 Se você está vindo da capital, de outro estado ou já mora aqui e quer trocar
-                de casa, eu conduzo todo o processo com você — desde a escolha do bairro ideal
+                de casa, eu conduzo todo o processo com você | desde a escolha do bairro ideal
                 até a entrega das chaves no cartório.
               </p>
             </div>

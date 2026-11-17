@@ -2,6 +2,10 @@
   "name": "landing-gisele",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

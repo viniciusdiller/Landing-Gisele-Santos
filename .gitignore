@@ -7,6 +7,9 @@ node_modules/
 .pnpm-store/
 .npm/
 .yarn/
+# Projeto usa pnpm (pnpm-lock.yaml); lockfiles de outros gerenciadores não entram
+package-lock.json
+yarn.lock
 
 # 2. Builds e Artefatos do Next.js
 .next/
